@@ -9,13 +9,13 @@ namespace PizzaBox.Domain.Models
   {
     public long OrderId { get; set; }
 
-    public DateTime Date { get; }
+    public DateTime Date { get; set; }
 
-    public List<Pizza> ListOfPizza { get; }
+    //public List<Pizza> ListOfPizza { get; }
 
-    public long StoreId;
+    public long StoreId { get; set; }
 
-    public long UserId;
+    public long UserId { get; set; }
 
     #region NAVIGATIONAL PROPERTIES
     public Store Store { get; set; }
@@ -30,7 +30,7 @@ namespace PizzaBox.Domain.Models
     {
       OrderId = DateTime.Now.Ticks;
 
-      //Date = DateTime.Now;
+      Date = DateTime.Now;
       
     }
 

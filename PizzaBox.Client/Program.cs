@@ -29,7 +29,7 @@ namespace PizzaBox.Client
 
             //PostAllPizza();
 
-            //StartProgram();
+            DoAll();
 
             // var a = DateTime.Now;
             // //var b = DateTime(2019,03,03,10,30,23);
@@ -38,31 +38,31 @@ namespace PizzaBox.Client
 
             //Console.WriteLine(DateTime.Now.Ticks);
 
-            DateTime date1 = DateTime.Now;
-            DateTime date2 = new DateTime(2012, 1, 2, 1, 0, 0);
-            double minutes = (date1.Subtract(date2).TotalMinutes);
-            Console.WriteLine(minutes);
+            // DateTime date1 = DateTime.Now;
+            // DateTime date2 = new DateTime(2012, 1, 2, 1, 0, 0);
+            // double minutes = (date1.Subtract(date2).TotalMinutes);
+            // Console.WriteLine(minutes);
         }
 
-        private static void StartProgram()
+        private static void DoAll()
         {
           Console.WriteLine("Welcome to Arlington's Fastest Pizza Delivery!");
           Console.WriteLine("");
           Console.WriteLine("Are you a client or a store?");
           Console.WriteLine("");
           Console.Write("Press 1 for client, 2 for store: ");
-          int who = Int32.Parse(Console.ReadLine());
+          string who = Console.ReadLine();
           Console.WriteLine("");
-          bool check = who == 1 || who == 2;
+          bool check = who == "1" || who == "2";
 
           while (!check)
             {
               Console.Write("Invalid input, please try again: ");
-              who = Int32.Parse(Console.ReadLine());
+              who = Console.ReadLine();
               Console.WriteLine("");
-              check = (who == 1 || who == 2);
+              check = (who == "1" || who == "2");
             }
-          if (who == 1)
+          if (who == "1")
           {
             User user = LoginUser();
             Store store = ChooseAStore();
@@ -71,7 +71,7 @@ namespace PizzaBox.Client
             //PostOrder();
 
           }
-          else if (who == 2)
+          else if (who == "2")
           {
             long storeid = LoginStore();
             MenuForStore();
@@ -147,19 +147,20 @@ namespace PizzaBox.Client
           Console.WriteLine("");
 
           Console.Write("Enter the store's number: ");
-          int selection_store = Int32.Parse(Console.ReadLine());
+          string selection_store = Console.ReadLine();
           Console.WriteLine("");
           bool check3 = CheckIfNumLocationIsValid(selection_store);
               
           while (!check3)
           {              
             Console.Write("The option you selected is not valid, please try again: ");
-            selection_store = Int32.Parse(Console.ReadLine());
+            selection_store = Console.ReadLine();
+            int selection_sto = Int32.Parse(selection_store);
             Console.WriteLine("");
             check3 = CheckIfNumLocationIsValid(selection_store);
           }
 
-          Store store = _sr.GetStore(selection_store);
+          Store store = _sr.GetStore(Int32.Parse(selection_store));
 
           return store;
         }
@@ -174,16 +175,16 @@ namespace PizzaBox.Client
           Console.WriteLine("");
 
           Console.Write("Enter your option's number: ");
-          int selection = Int32.Parse(Console.ReadLine());
+          string selection = Console.ReadLine();
           Console.WriteLine("");
-          bool check = selection == 1 || selection == 2 || selection == 3;
+          bool check = selection == "1" || selection == "2" || selection == "3";
               
           while (!check)
           {
             Console.Write("The option you selected is not valid, please try again: ");
-            selection = Int32.Parse(Console.ReadLine());
+            selection = Console.ReadLine();
             Console.WriteLine("");
-            check = selection == 1 || selection == 2 || selection == 3;
+            check = selection == "1" || selection == "2" || selection == "3";
           }
 
         } 
@@ -231,23 +232,33 @@ namespace PizzaBox.Client
             Console.WriteLine("Press 2: MY ORDER IS READY");
             Console.WriteLine("");
             Console.Write("Enter your option's number: ");
-            int addPizza = Int32.Parse(Console.ReadLine());
+            string addPizza = Console.ReadLine();
             Console.WriteLine("");
-            bool check2 = addPizza == 1 || addPizza == 2;
+            bool check2 = addPizza == "1" || addPizza == "2";
             while (!check2)
             {
               Console.Write("The option you selected is not valid, please try again: ");
-              addPizza = Int32.Parse(Console.ReadLine());
+              addPizza = Console.ReadLine();
               Console.WriteLine("");            
-              check2 = addPizza == 1 || addPizza == 2;
+              check2 = addPizza == "1" || addPizza == "2";
             }
 
-            if (addPizza == 1)
+            if (addPizza == "1")
             {
               check = true;
             }
-            else if (addPizza == 2)
+            else if (addPizza == "2")
             {
+              Console.WriteLine("");
+              Console.WriteLine("This is your order:");
+              Console.WriteLine("");
+              foreach (var p in list)            
+              {
+                Console.WriteLine($"{p.Name} ${p.Price}");
+              }
+              decimal sumPrices2 = list.Sum(l => l.Price);
+              Console.WriteLine("");
+              Console.WriteLine($"Your total is {sumPrices2}"); 
               check = false;
             }
           }
@@ -258,44 +269,63 @@ namespace PizzaBox.Client
         private static int SelectPizza()
         {
           Console.Write("Enter your pizza's number: ");
-          int selection_pizza = Int32.Parse(Console.ReadLine());
+          string selection_pizza = Console.ReadLine();
           Console.WriteLine("");
-          bool check = CheckIfNumMenuPizzaIsValid(selection_pizza) || selection_pizza == 0;
+          bool check = CheckIfNumMenuPizzaIsValid(selection_pizza);
             
           while (!check)
           {
             Console.Write("The option you selected is not valid, please try again: ");
-            selection_pizza = Int32.Parse(Console.ReadLine());
+            selection_pizza = Console.ReadLine();
+            //int selection_pizz = Int32.Parse(selection_pizza);
             Console.WriteLine("");            
-            check = CheckIfNumMenuPizzaIsValid(selection_pizza) || selection_pizza == 0;
+            check = CheckIfNumMenuPizzaIsValid(selection_pizza);
           }
-          return selection_pizza;
+          return Int32.Parse(selection_pizza);
         }
 
-        private static bool CheckIfNumMenuPizzaIsValid(int nuMenu)
+        private static bool CheckIfNumMenuPizzaIsValid(string nuMenu)
         {
-          Pizza pizza = _pr.GetPizzaByNumMenu(nuMenu);
-          if (pizza == null)
+          int result;
+          if (int.TryParse(nuMenu, out result))
           {
-            return false;
+            Pizza pizza = _pr.GetPizzaByNumMenu(Int32.Parse(nuMenu));
+            if (pizza == null)
+            {
+              return false;
+            }
+            else
+            {
+              return true;
+            }
           }
           else
           {
-            return true;
-          }
-        }
-
-        private static bool CheckIfNumLocationIsValid(int nuMenu)
-        {
-          Store store = _sr.GetStoreByNumMenu(nuMenu);
-          if (store == null)
-          {
             return false;
           }
-          else
+          
+          
+        }
+
+        private static bool CheckIfNumLocationIsValid(string nuMenu)
+        {
+          int result;
+          if (int.TryParse(nuMenu, out result))
           {
-            return true;
+            Store store = _sr.GetStoreByNumMenu(Int32.Parse(nuMenu));
+            if (store == null)
+            {
+              return false;
+            }
+            else
+            {
+              return true;
+            }
           }
+          else{
+            return false;
+          }
+           
         }
 
         // private static void PostAllPizza()

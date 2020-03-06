@@ -10,8 +10,8 @@ using PizzaBox.Storing.Databases;
 namespace PizzaBox.Storing.Migrations
 {
     [DbContext(typeof(PizzaBoxDbContext))]
-    [Migration("20200306141405_migration5")]
-    partial class migration5
+    [Migration("20200306193044_migration6")]
+    partial class migration6
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,34 +26,91 @@ namespace PizzaBox.Storing.Migrations
                     b.Property<long>("OrderId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("StoreId1")
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("StoreId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("UserId1")
+                    b.Property<long>("UserId")
                         .HasColumnType("bigint");
 
                     b.HasKey("OrderId");
 
-                    b.HasIndex("StoreId1");
+                    b.HasIndex("StoreId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Order");
+
+                    b.HasData(
+                        new
+                        {
+                            OrderId = 1L,
+                            Date = new DateTime(2020, 3, 6, 13, 30, 44, 663, DateTimeKind.Local).AddTicks(6365),
+                            StoreId = 1L,
+                            UserId = 1L
+                        },
+                        new
+                        {
+                            OrderId = 2L,
+                            Date = new DateTime(2020, 3, 6, 13, 30, 44, 663, DateTimeKind.Local).AddTicks(6983),
+                            StoreId = 2L,
+                            UserId = 2L
+                        },
+                        new
+                        {
+                            OrderId = 3L,
+                            Date = new DateTime(2020, 3, 6, 13, 30, 44, 663, DateTimeKind.Local).AddTicks(7008),
+                            StoreId = 1L,
+                            UserId = 2L
+                        });
                 });
 
             modelBuilder.Entity("PizzaBox.Domain.Models.OrderPizza", b =>
                 {
+                    b.Property<long>("OrderPizzaId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
                     b.Property<long>("OrderId")
                         .HasColumnType("bigint");
 
                     b.Property<long>("PizzaId")
                         .HasColumnType("bigint");
 
-                    b.HasKey("OrderId", "PizzaId");
+                    b.HasKey("OrderPizzaId");
+
+                    b.HasIndex("OrderId");
 
                     b.HasIndex("PizzaId");
 
                     b.ToTable("OrderPizza");
+
+                    b.HasData(
+                        new
+                        {
+                            OrderPizzaId = 1L,
+                            Amount = 2,
+                            OrderId = 1L,
+                            PizzaId = 3L
+                        },
+                        new
+                        {
+                            OrderPizzaId = 2L,
+                            Amount = 3,
+                            OrderId = 1L,
+                            PizzaId = 5L
+                        },
+                        new
+                        {
+                            OrderPizzaId = 3L,
+                            Amount = 1,
+                            OrderId = 2L,
+                            PizzaId = 2L
+                        });
                 });
 
             modelBuilder.Entity("PizzaBox.Domain.Models.Pizza", b =>
@@ -64,78 +121,64 @@ namespace PizzaBox.Storing.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Inventory")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("NumMenu")
                         .HasColumnType("int");
 
-                    b.Property<long?>("OrderId")
-                        .HasColumnType("bigint");
-
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("PizzaId");
-
-                    b.HasIndex("OrderId");
 
                     b.ToTable("Pizza");
 
                     b.HasData(
                         new
                         {
-                            PizzaId = 637190792455674088L,
-                            Description = "tomato sauce, vegan mozzarella, pineapple, green pepper, onions",
-                            Inventory = 30,
+                            PizzaId = 1L,
+                            Description = "thin crust, tomato sauce, vegan mozzarella, pineapple, green pepper, onions",
                             Name = "SMALL HAWAIIAN PIZZA",
                             NumMenu = 1,
                             Price = 5.00m
                         },
                         new
                         {
-                            PizzaId = 637190792455675539L,
-                            Description = "tomato sauce, vegan mozzarella, pineapple, green pepper, onions",
-                            Inventory = 18,
+                            PizzaId = 2L,
+                            Description = "thin crust, tomato sauce, vegan mozzarella, pineapple, green pepper, onions",
                             Name = "MEDIUM HAWAIIAN PIZZA",
                             NumMenu = 2,
                             Price = 9.50m
                         },
                         new
                         {
-                            PizzaId = 637190792455675591L,
-                            Description = "tomato sauce, vegan mozzarella, pineapple, green pepper, onions",
-                            Inventory = 12,
+                            PizzaId = 3L,
+                            Description = "thin crust, tomato sauce, vegan mozzarella, pineapple, green pepper, onions",
                             Name = "LARGE HAWAIIAN PIZZA",
                             NumMenu = 3,
                             Price = 13.90m
                         },
                         new
                         {
-                            PizzaId = 637190792455675594L,
-                            Description = "tomato sauce, vegan mozzarella, tomatos, avocado, tofu, onions",
-                            Inventory = 24,
+                            PizzaId = 4L,
+                            Description = "flatbread, tomato sauce, vegan mozzarella, tomatos, avocado, tofu, onions",
                             Name = "SMALL EXQUISITE PIZZA",
                             NumMenu = 4,
                             Price = 6.00m
                         },
                         new
                         {
-                            PizzaId = 637190792455675595L,
-                            Description = "tomato sauce, vegan mozzarella, tomatos, avocado, tofu, onions",
-                            Inventory = 30,
+                            PizzaId = 5L,
+                            Description = "flatbread, tomato sauce, vegan mozzarella, tomatos, avocado, tofu, onions",
                             Name = "MEDIUM EXQUISITE PIZZA",
                             NumMenu = 5,
                             Price = 11.00m
                         },
                         new
                         {
-                            PizzaId = 637190792455675645L,
-                            Description = "tomato sauce, vegan mozzarella, tomatos, avocado, tofu, onions",
-                            Inventory = 17,
+                            PizzaId = 6L,
+                            Description = "flatbread, tomato sauce, vegan mozzarella, tomatos, avocado, tofu, onions",
                             Name = "LARGE EXQUISITE PIZZA",
                             NumMenu = 6,
                             Price = 15.50m
@@ -166,7 +209,7 @@ namespace PizzaBox.Storing.Migrations
                     b.HasData(
                         new
                         {
-                            StoreId = 637190792455617291L,
+                            StoreId = 1L,
                             Address = "Cooper 786",
                             Name = "MammaMía",
                             NumMenu = 1,
@@ -174,7 +217,7 @@ namespace PizzaBox.Storing.Migrations
                         },
                         new
                         {
-                            StoreId = 637190792455617811L,
+                            StoreId = 2L,
                             Address = "Mitchel 83",
                             Name = "DiegoPizza",
                             NumMenu = 2,
@@ -182,7 +225,7 @@ namespace PizzaBox.Storing.Migrations
                         },
                         new
                         {
-                            StoreId = 637190792455617837L,
+                            StoreId = 3L,
                             Address = "Mesquite 476",
                             Name = "MyPizza",
                             NumMenu = 3,
@@ -190,7 +233,7 @@ namespace PizzaBox.Storing.Migrations
                         },
                         new
                         {
-                            StoreId = 637190792455617839L,
+                            StoreId = 4L,
                             Address = "Abram 34",
                             Name = "TuPizza",
                             NumMenu = 4,
@@ -219,28 +262,28 @@ namespace PizzaBox.Storing.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = 637190792455576470L,
+                            UserId = 1L,
                             Address = "Central 960",
                             Name = "BiancaVisconti",
                             Password = "12345"
                         },
                         new
                         {
-                            UserId = 637190792455599298L,
+                            UserId = 2L,
                             Address = "Street 4250",
                             Name = "SilvanaRoncagliolo",
                             Password = "67890"
                         },
                         new
                         {
-                            UserId = 637190792455599343L,
+                            UserId = 3L,
                             Address = "Calle 13",
                             Name = "JuanitoPerez",
                             Password = "asasa"
                         },
                         new
                         {
-                            UserId = 637190792455599346L,
+                            UserId = 4L,
                             Address = "Avenida 89",
                             Name = "MariaSoto",
                             Password = "trebol"
@@ -251,11 +294,15 @@ namespace PizzaBox.Storing.Migrations
                 {
                     b.HasOne("PizzaBox.Domain.Models.Store", "Store")
                         .WithMany("Orders")
-                        .HasForeignKey("StoreId1");
+                        .HasForeignKey("StoreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("PizzaBox.Domain.Models.User", "User")
                         .WithMany("Orders")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("PizzaBox.Domain.Models.OrderPizza", b =>
@@ -271,13 +318,6 @@ namespace PizzaBox.Storing.Migrations
                         .HasForeignKey("PizzaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("PizzaBox.Domain.Models.Pizza", b =>
-                {
-                    b.HasOne("PizzaBox.Domain.Models.Order", null)
-                        .WithMany("ListOfPizza")
-                        .HasForeignKey("OrderId");
                 });
 #pragma warning restore 612, 618
         }
