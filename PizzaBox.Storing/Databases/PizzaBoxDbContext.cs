@@ -22,6 +22,8 @@ namespace PizzaBox.Storing.Databases
 
       builder.Entity<User>().HasMany(u => u.Orders).WithOne(o => o.User);
 
+      builder.Entity<User>().Property(u => u.UserId).ValueGeneratedNever();
+
       builder.Entity<User>().HasData(new User[]
       {
         new User() { Name = "BiancaVisconti", Password = "12345", Address = "Central 960"},
@@ -35,6 +37,8 @@ namespace PizzaBox.Storing.Databases
 
       builder.Entity<Store>().HasMany(u => u.Orders).WithOne(o => o.Store);
 
+      builder.Entity<Store>().Property(u => u.StoreId).ValueGeneratedNever();
+
       builder.Entity<Store>().HasData(new Store[]
       {
         new Store() { Name = "MammaMía", Password = "13131", Address = "Cooper 786", NumMenu = 1},
@@ -46,16 +50,19 @@ namespace PizzaBox.Storing.Databases
 
       builder.Entity<Order>().HasKey(o => o.OrderId);
       builder.Entity<Pizza>().HasKey(p => p.PizzaId);
-      builder.Entity<OrderPizza>().HasKey(op => new { op.PizzaId, op.OrderId });
+      builder.Entity<OrderPizza>().HasKey(op => new { op.OrderId, op.PizzaId });
 
-      builder.Entity<Pizza>().HasMany(p => p.OrderPizzas).WithOne(pt => pt.Pizza).HasForeignKey(pt => pt.PizzaId);
       builder.Entity<Order>().HasMany(o => o.OrderPizzas).WithOne(op => op.Order).HasForeignKey(op => op.OrderId);
+      builder.Entity<Pizza>().HasMany(p => p.OrderPizzas).WithOne(op => op.Pizza).HasForeignKey(op => op.PizzaId);
 
-      builder.Entity<Order>().HasData(new Order[]
-      {
-        //new Order()
+      builder.Entity<Order>().Property(u => u.OrderId).ValueGeneratedNever();
+      builder.Entity<Pizza>().Property(u => u.PizzaId).ValueGeneratedNever();
+
+      // builder.Entity<Order>().HasData(new Order[]
+      // {
+      //   //new Order()
         
-      });
+      // });
       
       builder.Entity<Pizza>().HasData(new Pizza[]
       {

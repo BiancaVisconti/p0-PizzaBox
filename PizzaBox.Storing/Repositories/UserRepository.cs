@@ -11,8 +11,7 @@ namespace PizzaBox.Storing.Repositories
   {
     public override List<User> Get() 
     {
-			return Table.Include(u => u.Name).Include(u => u.Address).ToList();
-
+			return Table.ToList();
     }
 
     public UserRepository() : base(_db.User) 
@@ -21,14 +20,6 @@ namespace PizzaBox.Storing.Repositories
 		}
 
     private static readonly UserRepository _ur = new UserRepository();
-
-    // public static UserRepository Instance
-    // {
-    //   get
-    //   {
-    //     return _ur;
-    //   }
-    // }
 
     public bool CheckIfAccountExists(string name, string password)
     {
@@ -40,6 +31,18 @@ namespace PizzaBox.Storing.Repositories
       {
         return false;
       }
+    }
+
+    public long GetId(string name, string password)
+    {
+      long id = (_db.User.SingleOrDefault(u => u.Name == name && u.Password == password).UserId);
+      
+      return id;
+    }
+
+    public User GetUser(string name, string password)
+    {
+      return _db.User.SingleOrDefault(u => u.Name == name && u.Password == password);
     }
 
 

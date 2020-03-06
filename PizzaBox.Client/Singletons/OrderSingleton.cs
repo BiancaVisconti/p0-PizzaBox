@@ -27,16 +27,21 @@ namespace PizzaBox.Client.Singletons
       return _or.Get();
     }
 
+    //TODO: 
+    public bool Post(Store store, User user)
+    {
+      var o = new Order() {
+        Store = store,
+        User= user,
+        // OrderPizzas = pizzas
+      };
 
-    // public bool Post()
-    // {
-    //   var p = new Order();
+      store.Orders = new List<Order>{o}; // p.crust = *crustId
+      user.Orders = new List<Order>{o};
+      
 
-    //   crust.Pizzas = new List<Pizza>{p}; // p.crust = *crustId
-    //   size.Pizzas = new List<Pizza>{p};
-
-    //   return _pr.Post(p);
-    // }
+      return _or.Post(o);
+    }
     
   }
 }

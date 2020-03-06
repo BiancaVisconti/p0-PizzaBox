@@ -11,8 +11,6 @@ namespace PizzaBox.Domain.Models
 
     public DateTime Date { get; }
 
-    public int NumOfPizza { get; }
-
     public List<Pizza> ListOfPizza { get; }
 
     public long StoreId;
@@ -32,9 +30,7 @@ namespace PizzaBox.Domain.Models
     {
       OrderId = DateTime.Now.Ticks;
 
-      Date = DateTime.Now;
-
-      //ListOfPizza = new List<Pizza>();
+      //Date = DateTime.Now;
       
     }
 

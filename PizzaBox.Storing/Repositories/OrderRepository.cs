@@ -9,9 +9,10 @@ namespace PizzaBox.Storing.Repositories
 {
   public class OrderRepository : ARepository<Order> //: IOrder
   {
+    //TODO: 
     public override List<Order> Get() 
     {
-			return Table.Include(o => o.OrderPizzas).Include(o => o.Date).Include(o => o.NumOfPizza).ToList();
+			return Table.ToList();
 
     }
 
