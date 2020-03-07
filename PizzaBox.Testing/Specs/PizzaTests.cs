@@ -15,5 +15,16 @@ namespace PizzaBox.Testing.Specs
       Assert.True(actual.Count >= 0);
 
     }
+    [Theory]
+    [InlineData(1)]
+    [InlineData(2)]
+
+    public void Test_RepositoryGetName(long l)
+    {
+      var sut = new PizzaRepository();
+      var actual = sut.GetName(l);
+
+      Assert.True(actual.Equals(typeof(string)));
+    }
   }
 }

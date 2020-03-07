@@ -31,7 +31,8 @@ namespace PizzaBox.Storing.Databases
         new User() { UserId = 1, Name = "BiancaVisconti", Password = "12345", Address = "Central 960"},
         new User() { UserId = 2, Name = "SilvanaRoncagliolo", Password = "67890", Address = "Street 4250"},
         new User() { UserId = 3, Name = "JuanitoPerez", Password = "asasa", Address = "Calle 13"},
-        new User() { UserId = 4, Name = "MariaSoto", Password = "trebol", Address = "Avenida 89"}
+        new User() { UserId = 4, Name = "MariaSoto", Password = "trebol", Address = "Avenida 89"},
+        new User() { UserId = 5, Name = "Rufuz", Password = "beio", Address = "Avenida beio 15"}
       });
 
       builder.Entity<Store>().HasKey(s => s.StoreId);

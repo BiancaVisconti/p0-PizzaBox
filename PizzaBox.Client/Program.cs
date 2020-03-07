@@ -69,13 +69,16 @@ namespace PizzaBox.Client
                   if (check2)
                   {
                     List<Pizza> list = PreOrder(user);
-                    PostOrder(store, user);
-                    var order = _or.Get();
-                    Order o = order[order.Count-1];
-                    var dict = PizzaAmount(list);
-                    foreach (var p in dict)
+                    if (list.Count > 0)
                     {
-                      PostOrderPizza(o, p.Key, p.Value);    
+                      PostOrder(store, user);
+                      var order = _or.Get();
+                      Order o = order[order.Count-1];
+                      var dict = PizzaAmount(list);
+                      foreach (var p in dict)
+                      {
+                        PostOrderPizza(o, p.Key, p.Value);    
+                      }
                     }
                   }
                   else
@@ -620,8 +623,8 @@ namespace PizzaBox.Client
         private static List<Pizza> PreOrder(User user)
         {
           List<Pizza> list = new List<Pizza>();
-          decimal maxTotal = 40M;                 // *** MAXTOTAL = 250
-          int maxTotalAmount = 3;                // *** MAXTOTALAMOUNT = 50 
+          decimal maxTotal = 250M;                 // *** MAXTOTAL = 250
+          int maxTotalAmount = 50;                // *** MAXTOTALAMOUNT = 50 
           bool check = true;
           
           while (check)
@@ -643,43 +646,41 @@ namespace PizzaBox.Client
             {
               list.Add(pizza);
               tempAmount = list.Count();
-              Console.WriteLine("-----------------------------");
-              Console.WriteLine("");
-              Console.WriteLine("This is your order so far:");
-              Console.WriteLine("");
-              foreach (var p in list)            
-              {
-                Console.WriteLine($"{p.Name} ${p.Price}");
-              } 
-              decimal sumPrices = list.Sum(l => l.Price);
-              Console.WriteLine("");
-              Console.WriteLine($"Your total so far is {sumPrices}");
-              Console.WriteLine("");
+              
+              PrintPartialOrder(list);
             }
 
             if (tempAmount < maxTotalAmount)
             {
+              menuPizza:
               Console.WriteLine("-----------------------------");
               Console.WriteLine("");
               Console.WriteLine("Press 1: ADD A PIZZA");
-              Console.WriteLine("Press 2: MY ORDER IS READY");
+              Console.WriteLine("Press 2: REMOVE LAST PIZZA ADDED");
+              Console.WriteLine("Press 3: MY ORDER IS READY");
               Console.WriteLine("");
               Console.Write("Enter your option's number: ");
               string addPizza = Console.ReadLine();
               Console.WriteLine("");
-              bool check2 = addPizza == "1" || addPizza == "2";
+              bool check2 = addPizza == "1" || addPizza == "2" || addPizza == "3";
               while (!check2)
               {
                 Console.Write("The option you selected is not valid, please try again: ");
                 addPizza = Console.ReadLine();
                 Console.WriteLine("");            
-                check2 = addPizza == "1" || addPizza == "2";
+                check2 = addPizza == "1" || addPizza == "2" || addPizza == "3";
               }
               if (addPizza == "1")
               {
                 check = true;
               }
               else if (addPizza == "2")
+              {
+                list = RemovePizza(list);
+                PrintPartialOrder(list);
+                goto menuPizza;
+              }
+              else if (addPizza == "3")
               {
                 CheckOut(list, user);
                 check = false;
@@ -694,6 +695,45 @@ namespace PizzaBox.Client
             } 
           }
           
+          return list;
+        }
+
+        private static void PrintPartialOrder(List<Pizza> list)
+        {
+          if (list.Count > 0)
+          {
+            Console.WriteLine("-----------------------------");
+            Console.WriteLine("");
+            Console.WriteLine("This is your order so far:");
+            Console.WriteLine("");
+            foreach (var p in list)            
+            {
+              Console.WriteLine($"{p.Name} ${p.Price}");
+            } 
+            decimal sumPrices = list.Sum(l => l.Price);
+            Console.WriteLine("");
+            Console.WriteLine($"Your total so far is {sumPrices}");
+            Console.WriteLine("");
+          }
+          else
+          {
+            Console.WriteLine("Order is empty");
+          }
+          
+          
+        }
+        
+        private static List<Pizza> RemovePizza(List<Pizza> list)
+        {
+          if (list.Count > 0)
+          {
+            list.RemoveAt(list.Count -1);
+          }
+          else
+          {
+            Console.WriteLine("There is no pizza to remove");
+          }
+
           return list;
         }
 
@@ -734,20 +774,28 @@ namespace PizzaBox.Client
 
         private static void CheckOut(List<Pizza> list, User user)
         {
-          Console.WriteLine("-----------------------------");
-          Console.WriteLine("");
-          Console.WriteLine("This is your final order:");
-          Console.WriteLine("");
-          foreach (var p in list)            
+          if (list.Count > 0)
           {
-            Console.WriteLine($"{p.Name} ${p.Price}");
+            Console.WriteLine("-----------------------------");
+            Console.WriteLine("");
+            Console.WriteLine("This is your final order:");
+            Console.WriteLine("");
+            foreach (var p in list)            
+            {
+              Console.WriteLine($"{p.Name} ${p.Price}");
+            }
+            decimal sumPrices2 = list.Sum(l => l.Price);
+            Console.WriteLine("");
+            Console.WriteLine($"Your total is {sumPrices2}");
+            Console.WriteLine(""); 
+            Console.WriteLine($"{user.Name}, your order is on its way, enjoy!");
+            Console.WriteLine("");
           }
-          decimal sumPrices2 = list.Sum(l => l.Price);
-          Console.WriteLine("");
-          Console.WriteLine($"Your total is {sumPrices2}");
-          Console.WriteLine(""); 
-          Console.WriteLine($"{user.Name}, your order is on its way, enjoy!");
-          Console.WriteLine("");
+          else
+          {
+            Console.WriteLine("No order has been placed");
+          }
+
         }
 
         private static int SelectPizza()
