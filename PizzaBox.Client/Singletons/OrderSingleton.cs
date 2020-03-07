@@ -27,17 +27,15 @@ namespace PizzaBox.Client.Singletons
       return _or.Get();
     }
 
-    //TODO: 
     public bool Post(Store store, User user)
     {
-      var o = new Order() 
-      {
-        Store = store,
-        User= user,
-      };
+      var o = new Order();
+    
+      // store.Orders = new List<Order>{o};
+      // user.Orders = new List<Order>{o};
 
-      store.Orders = new List<Order>{o};
-      user.Orders = new List<Order>{o};
+      o.StoreId = store.StoreId;
+      o.UserId = user.UserId;
       
 
       return _or.Post(o);

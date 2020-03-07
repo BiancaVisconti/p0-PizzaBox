@@ -26,6 +26,12 @@ namespace PizzaBox.Storing.Repositories
       
       return list;
     }
+
+    public new bool Post(OrderPizza orderPizza)
+    {
+      _db.OrderPizza.Add(orderPizza);
+      return _db.SaveChanges() == 1;
+    }
     
   }
 }

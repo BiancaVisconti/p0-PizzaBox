@@ -13,6 +13,8 @@ namespace PizzaBox.Client
 
         private static readonly OrderSingleton _os = OrderSingleton.Instance;
 
+        private static readonly OrderPizzaSingleton _ops = OrderPizzaSingleton.Instance;
+
         private static readonly UserRepository _ur = new UserRepository();
 
         private static readonly StoreRepository _sr = new StoreRepository();
@@ -67,7 +69,14 @@ namespace PizzaBox.Client
                   if (check2)
                   {
                     List<Pizza> list = PreOrder(user);
-                    //TODO: POST THE ORDER
+                    PostOrder(store, user);
+                    var order = _or.Get();
+                    Order o = order[order.Count-1];
+                    var dict = PizzaAmount(list);
+                    foreach (var p in dict)
+                    {
+                      PostOrderPizza(o, p.Key, p.Value);    
+                    }
                   }
                   else
                   {
@@ -803,24 +812,34 @@ namespace PizzaBox.Client
            
         }
 
-        //TODO: 
-        private static void PostOrder()
+
+        private static void PostOrder(Store store, User user)
         {
-          var store = _sr.Get();
-          var user = _ur.Get();
-          
-          _os.Post(store[0], user[0]);
+          _os.Post(store, user);
         }
 
+        private static void PostOrderPizza(Order order, Pizza pizza, int amount)
+        {
+          _ops.Post(order, pizza, amount);
+        }
 
-        // private static void PostAllPizza()
-        // {
-        //   var crust = _cr.Get();
-        //   var size = _sr.Get();
+        private static Dictionary<Pizza, int> PizzaAmount(List<Pizza> list)
+        {
+          Dictionary<Pizza, int> RepeatedPizzaOrder = new Dictionary<Pizza, int>();
 
-        //   _ps.Post(crust[0], size[0], null);
-
-        // }
+          for (int i = 0; i < list.Count(); i++)
+          {
+              if (RepeatedPizzaOrder.ContainsKey(list[i]))
+              {
+                RepeatedPizzaOrder[list[i]]++;
+              }
+              else
+              {
+                RepeatedPizzaOrder.Add(list[i], 1);
+              }
+          }
+          return RepeatedPizzaOrder;
+        }
 
     }
 }
