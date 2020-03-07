@@ -12,16 +12,11 @@ namespace PizzaBox.Storing.Repositories
   {
     private static readonly PizzaRepository _pr = new PizzaRepository();
 
-    public override List<Pizza> Get() 
+    public List<Pizza> Get() 
     {
-			return Table.ToList();
+			return _db.Pizza.ToList();
     }
-
-    public PizzaRepository() : base(_db.Pizza) 
-    {
-
-		}
-
+ 
     public string GetName(long pizzaId)
     {
       string pizzaName = (_db.Pizza.SingleOrDefault(p => p.PizzaId == pizzaId).Name);

@@ -30,15 +30,10 @@ namespace PizzaBox.Client.Singletons
     public bool Post(Order order, Pizza pizza, int amount)
     {
       var op = new OrderPizza();
-    
-      // store.Orders = new List<Order>{o};
-      // user.Orders = new List<Order>{o};
-
       op.OrderId = order.OrderId;
       op.PizzaId = pizza.PizzaId;
       op.Amount = amount;
-      
-
+    
       return _opr.Post(op);
     }
     

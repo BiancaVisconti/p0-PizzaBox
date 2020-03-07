@@ -9,16 +9,11 @@ namespace PizzaBox.Storing.Repositories
   {
     private static readonly OrderPizzaRepository _opr = new OrderPizzaRepository();
 
-    public override List<OrderPizza> Get() 
+    public List<OrderPizza> Get() 
     {
-			return Table.ToList();
+			return _db.OrderPizza.ToList();
 
     }
-
-    public OrderPizzaRepository() : base(_db.OrderPizza) 
-    {
-
-		}
 
     public List<OrderPizza> Get(Order order)
     {
@@ -27,7 +22,7 @@ namespace PizzaBox.Storing.Repositories
       return list;
     }
 
-    public new bool Post(OrderPizza orderPizza)
+    public bool Post(OrderPizza orderPizza)
     {
       _db.OrderPizza.Add(orderPizza);
       return _db.SaveChanges() == 1;

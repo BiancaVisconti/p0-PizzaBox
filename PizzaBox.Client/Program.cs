@@ -83,15 +83,21 @@ namespace PizzaBox.Client
                   }
                   else
                   {
-                    Console.WriteLine("You made an order within the last 24 hours in another store");
-                    Console.WriteLine("Remember, for the first 24 hours you can only order pizza from the same pizzeria");
+                    Console.WriteLine("===================================================================");
+                    Console.WriteLine("");
+                    Console.WriteLine("YOU MADE AN ORDER WITHIN THE LAST 24 HOURS IN ANOTHER STORE");
+                    Console.WriteLine("");
+                    Console.WriteLine("REMEMBER, FOR THE FIRST 24 HOURS YOU CAN ONLY ORDER PIZZA FROM THE SAME PIZZERIA");
                     Console.WriteLine("");
                   } 
                 }
                 else
                 {
-                  Console.WriteLine("You made and order within the last 2 hours, you cannot order now");
-                  Console.WriteLine("Remember, for the first 24 hours you can only order pizza from the same pizzeria");
+                  Console.WriteLine("===================================================================");
+                  Console.WriteLine("");
+                  Console.WriteLine("YOU MADE AN ORDER WITHIN THE LAST 2 HOURS, YOU CANNOT ORDER NOW");
+                  Console.WriteLine("");
+                  Console.WriteLine("REMEMBER, FOR THE FIRST 24 HOURS YOU CAN ONLY ORDER PIZZA FROM THE SAME PIZZERIA");
                   Console.WriteLine("");
                 }
                 
@@ -185,27 +191,27 @@ namespace PizzaBox.Client
         private static User LoginUser()
         {
           Console.Write("Please enter you username: ");
-            string client = Console.ReadLine();
-            Console.Write("Please enter you password: ");
-            string cli_password = Console.ReadLine();
+          string client = Console.ReadLine();
+          Console.Write("Please enter you password: ");
+          string cli_password = Console.ReadLine();
+          Console.WriteLine("");
+          bool check2 = _ur.CheckIfAccountExists(client, cli_password);
+
+          while (!check2)
+          {
+            Console.WriteLine("Invalid input, please try again");
             Console.WriteLine("");
-            bool check2 = _ur.CheckIfAccountExists(client, cli_password);
+            Console.Write("Please enter you username again: ");
+            client = Console.ReadLine();
+            Console.Write("Please enter you password again: ");
+            cli_password = Console.ReadLine();
+            Console.WriteLine("");
+            check2 = _ur.CheckIfAccountExists(client, cli_password);
+          }
 
-            while (!check2)
-            {
-              Console.WriteLine("Invalid input, please try again");
-              Console.WriteLine("");
-              Console.Write("Please enter you username again: ");
-              client = Console.ReadLine();
-              Console.Write("Please enter you password again: ");
-              cli_password = Console.ReadLine();
-              Console.WriteLine("");
-              check2 = _ur.CheckIfAccountExists(client, cli_password);
-            }
+          User user = _ur.GetUser(client, cli_password);
 
-            User user = _ur.GetUser(client, cli_password);
-
-            return user;
+          return user;
         }
 
         private static Store LoginStore()
@@ -247,7 +253,7 @@ namespace PizzaBox.Client
           }
           else
           {
-            Console.WriteLine("Sales and Revenue of all times");
+            Console.WriteLine("SALES AND REVENUE OF ALL TIME");
             Console.WriteLine("------------------------------");
             Console.WriteLine("");
             decimal totalRevenue = 0;
@@ -330,13 +336,14 @@ namespace PizzaBox.Client
           else
           {
             int count = 1;
-            Console.WriteLine($"Orders of the last {days} days");
+            Console.WriteLine($"ORDERS OF THE LAST {days} DAYS");
             Console.WriteLine("--------------------------");
             Console.WriteLine("");
 
             foreach (var o in listOrders)
             {
               decimal total = 0;
+              Console.WriteLine("--------");
               Console.WriteLine($"Order {count} {o.Date}");
               Console.WriteLine("--------");
               Console.WriteLine("");
@@ -377,12 +384,13 @@ namespace PizzaBox.Client
           else
           {
             int count = 1;
-            Console.WriteLine($"Orders of all times");
-            Console.WriteLine("--------------------");
+            Console.WriteLine($"ORDERS OF ALL TIME");
+            Console.WriteLine("------------------");
             Console.WriteLine("");
             foreach (var o in listOrders)
             {
               decimal total = 0;
+              Console.WriteLine("--------");
               Console.WriteLine($"Order {count} {o.Date}");
               Console.WriteLine("--------");
               Console.WriteLine("");
@@ -425,12 +433,13 @@ namespace PizzaBox.Client
           else
           {
             int count = 1;
-            Console.WriteLine($"Orders of all times");
-            Console.WriteLine("--------------------");
+            Console.WriteLine($"ORDERS OF ALL TIME");
+            Console.WriteLine("------------------");
             Console.WriteLine("");
             foreach (var o in listOrders)
             {
               decimal total = 0;
+              Console.WriteLine("--------");
               Console.WriteLine($"Order {count} {o.Date}");
               Console.WriteLine("--------");
               Console.WriteLine("");
@@ -450,7 +459,7 @@ namespace PizzaBox.Client
               }
               count += 1;
               Console.WriteLine("");
-              Console.WriteLine($"The total of the order was ${total}");
+              Console.WriteLine($"The total of your order was ${total}");
               Console.WriteLine("");
             }
           
@@ -471,12 +480,13 @@ namespace PizzaBox.Client
           else
           {
             int count = 1;
-            Console.WriteLine($"Orders of the last {days} days");
+            Console.WriteLine($"ORDERS OF THE LAST {days} DAYS");
             Console.WriteLine("--------------------------");
             Console.WriteLine("");
             foreach (var o in listOrders)
             {
               decimal total = 0;
+              Console.WriteLine("--------");
               Console.WriteLine($"Order {count} {o.Date}");
               Console.WriteLine("--------");
               Console.WriteLine("");
@@ -496,7 +506,7 @@ namespace PizzaBox.Client
               }
               count += 1;
               Console.WriteLine("");
-              Console.WriteLine($"The total of the order was ${total}");
+              Console.WriteLine($"The total of your order was ${total}");
               Console.WriteLine("");
             }
           
@@ -510,7 +520,7 @@ namespace PizzaBox.Client
         {
           Console.WriteLine("-----------------------------");
           Console.WriteLine("");
-          Console.WriteLine("Please choose a store from the following");
+          Console.WriteLine("Please choose a pizzeria from the following");
           Console.WriteLine("");
           ShowStores();
           Console.WriteLine("");
@@ -539,9 +549,10 @@ namespace PizzaBox.Client
           Console.WriteLine("");
           Console.Write("Choose one of the following options");
           Console.WriteLine("");
-          Console.WriteLine("1) Orders History");
-          Console.WriteLine("2) Place an order");
-          Console.WriteLine("3) Log out");
+          Console.WriteLine("");
+          Console.WriteLine("1) PAST ORDERS");
+          Console.WriteLine("2) MAKE AN ORDER");
+          Console.WriteLine("3) LOG OUT");
           Console.WriteLine("");
 
           Console.Write("Enter your option's number: ");
@@ -566,9 +577,10 @@ namespace PizzaBox.Client
           Console.WriteLine("");
           Console.Write("Choose one of the following options");
           Console.WriteLine("");
-          Console.WriteLine("1) All Orders");
-          Console.WriteLine("2) Last 7 Days");
-          Console.WriteLine("3) Last 30 Days");
+          Console.WriteLine("");
+          Console.WriteLine("1) ALL ORDERS");
+          Console.WriteLine("2) LAST 7 DAYS");
+          Console.WriteLine("3) LAST 30 DAYS");
           Console.WriteLine("");
 
           Console.Write("Enter your option's number: ");
@@ -594,9 +606,9 @@ namespace PizzaBox.Client
           Console.WriteLine("");
           Console.Write("Choose one of the following options");
           Console.WriteLine("");
-          Console.WriteLine("1) Orders History");
-          Console.WriteLine("2) Sales");
-          Console.WriteLine("3) Log out");
+          Console.WriteLine("1) PAST ORDERS");
+          Console.WriteLine("2) SALES AND REVENUE");
+          Console.WriteLine("3) LOG OUT");
           Console.WriteLine("");
 
           Console.Write("Enter your option's number: ");
@@ -855,7 +867,7 @@ namespace PizzaBox.Client
           int result;
           if (int.TryParse(nuMenu, out result))
           {
-            Store store = _sr.GetStoreByNumMenu(Int32.Parse(nuMenu));
+            Store store = _sr.GetStore(Int32.Parse(nuMenu)); ///*******CHANGE METHOD
             if (store == null)
             {
               return false;

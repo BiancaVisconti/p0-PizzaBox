@@ -13,20 +13,21 @@ namespace PizzaBox.Storing.Repositories
 
     private static readonly OrderRepository _or = new OrderRepository();
 
-    public override List<Order> Get() 
+    public List<Order> Get() 
     {
-			return Table.ToList();
+			return _db.Order.ToList();
     }
-
-    public OrderRepository() : base(_db.Order) 
-    {
-
-		}
 
     public List<Order> Get(Store store)
     {
       List<Order> list = (_db.Order.Where(o => o.StoreId == store.StoreId).ToList());
       
+      return list;
+    }
+
+    public List<Order> Get(User user)
+    {
+      List<Order> list = (_db.Order.Where(o => o.UserId == user.UserId).ToList());
       return list;
     }
 
@@ -76,14 +77,8 @@ namespace PizzaBox.Storing.Repositories
       }
       return count;
     }
-    
-    public List<Order> Get(User user)
-    {
-      List<Order> list = (_db.Order.Where(o => o.UserId == user.UserId).ToList());
-      return list;
-    }
 
-    public new bool Post(Order order)
+    public bool Post(Order order)
     {
       _db.Order.Add(order);
       return _db.SaveChanges() == 1;

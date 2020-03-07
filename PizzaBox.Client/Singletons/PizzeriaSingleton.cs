@@ -25,17 +25,6 @@ namespace PizzaBox.Client.Singletons
     {
       return _pr.Get();
     }
-
-
-    // public bool Post()
-    // {
-    //   var p = new Pizza();
-
-    //   crust.Pizzas = new List<Pizza>{p}; // p.crust = *crustId
-    //   size.Pizzas = new List<Pizza>{p};
-
-    //   return _pr.Post(p);
-    // }
     
   }
 }

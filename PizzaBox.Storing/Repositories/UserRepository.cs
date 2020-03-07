@@ -11,15 +11,10 @@ namespace PizzaBox.Storing.Repositories
   {
     private static readonly UserRepository _ur = new UserRepository();
 
-    public override List<User> Get() 
+    public List<User> Get() 
     {
-			return Table.ToList();
+			return _db.User.ToList();
     }
-
-    public UserRepository() : base(_db.User) 
-    {
-
-		}
 
     public bool CheckIfAccountExists(string name, string password)
     {
@@ -51,6 +46,7 @@ namespace PizzaBox.Storing.Repositories
       
       return userName;
     }
+
 
   }
 }

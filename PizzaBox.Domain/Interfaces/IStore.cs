@@ -15,8 +15,6 @@ namespace PizzaBox.Domain.Interfaces
 
     Store GetStore(int numMenu);
 
-    Store GetStoreByNumMenu(int id);
-
     string GetName(long storeId);
   }
 }
