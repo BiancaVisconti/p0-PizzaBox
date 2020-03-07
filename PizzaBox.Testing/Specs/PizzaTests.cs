@@ -6,10 +6,11 @@ namespace PizzaBox.Testing.Specs
 {
   public class PizzaTests
   {
+    PizzaRepository sut = new PizzaRepository();
+    
     [Fact]
     public void Test_RepositoryGet()
     {
-      var sut = new PizzaRepository();
       var actual = sut.Get();
 
       Assert.True(actual != null);
@@ -21,7 +22,6 @@ namespace PizzaBox.Testing.Specs
     [InlineData(2)]
     public void Test_RepositoryGetName(long l)
     {
-      var sut = new PizzaRepository();
       var actual = sut.GetName(l);
 
       Assert.IsType<string>(actual);
@@ -32,7 +32,6 @@ namespace PizzaBox.Testing.Specs
     [InlineData(2)]
     public void Test_RepositoryGetPrice(long l)
     {
-      var sut = new PizzaRepository();
       var actual = sut.GetPrice(l);
 
       Assert.IsType<decimal>(actual);
@@ -43,7 +42,6 @@ namespace PizzaBox.Testing.Specs
     [InlineData(2)]
     public void Test_RepositoryGetPizzaByNumMenu(int i)
     {
-      var sut = new PizzaRepository();
       var actual = sut.GetPizzaByNumMenu(i);
 
       Assert.IsType<Pizza>(actual);

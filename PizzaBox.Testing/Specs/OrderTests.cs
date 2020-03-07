@@ -6,10 +6,15 @@ namespace PizzaBox.Testing.Specs
 {
   public class OrderTests
   {
+    Order o = new Order();
+    Store s = new Store();
+    User u = new User();
+    double d;
+    OrderRepository sut = new OrderRepository();
+    
     [Fact]
     public void Test_RepositoryGet()
     {
-      var sut = new OrderRepository();
       var actual = sut.Get();
 
       Assert.True(actual != null);
@@ -17,9 +22,8 @@ namespace PizzaBox.Testing.Specs
     }
 
     [Fact]
-    public void Test_RepositoryGetStore(Store s)
+    public void Test_RepositoryGetStore()
     {
-      var sut = new OrderRepository();
       var actual = sut.Get(s);
 
       Assert.True(actual != null);
@@ -27,19 +31,18 @@ namespace PizzaBox.Testing.Specs
     }
 
     [Fact]
-    public void Test_RepositoryGetUser(User u)
+    public void Test_RepositoryGetUser()
     {
-      var sut = new OrderRepository();
       var actual = sut.Get(u);
 
       Assert.True(actual != null);
       Assert.True(actual.Count >= 0);
     }
 
+
     [Fact]
-    public void Test_RepositoryGetPeriodStore(Store s, double d)
+    public void Test_RepositoryGetPeriodStore()
     {
-      var sut = new OrderRepository();
       var actual = sut.GetPeriod(s, d);
 
       Assert.True(actual != null);
@@ -47,41 +50,39 @@ namespace PizzaBox.Testing.Specs
     }
 
     [Fact]
-    public void Test_RepositoryGetPeriodUser(User u, double d)
+    public void Test_RepositoryGetPeriodUser()
     {
-      var sut = new OrderRepository();
       var actual = sut.GetPeriod(u, d);
 
       Assert.True(actual != null);
       Assert.True(actual.Count >= 0);
     }
 
+
     [Fact]
-    public void Test_RepositoryGet2Hours(User u)
+    public void Test_RepositoryGet2Hours()
     {
-      var sut = new OrderRepository();
       var actual = sut.Get2Hours(u);
 
       Assert.True(actual >= 0);
     }
 
     [Fact]
-    public void Test_RepositoryGet24Hours(User u, Store s)
+    public void Test_RepositoryGet24Hours()
     {
-      var sut = new OrderRepository();
       var actual = sut.Get24HoursAtStore(u, s);
 
       Assert.True(actual >= 0);
     }
 
-    [Fact]
-    public void Test_RepositoryPost(Order o)
+    /*[Fact]
+    public void Test_RepositoryPost()
     {
-      var sut = new OrderRepository();
       var actual = sut.Post(o);
 
       Assert.True(actual);
     }
+    */
 
 
   }

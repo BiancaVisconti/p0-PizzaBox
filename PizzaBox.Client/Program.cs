@@ -29,6 +29,8 @@ namespace PizzaBox.Client
             DoAll();
         }
 
+//========================================================================= DO ALL
+
         private static void DoAll()
 
         {
@@ -161,7 +163,10 @@ namespace PizzaBox.Client
             
         }
 
+
+
 //========================================================================= LOGIN
+        
         private static string ClientOrStore()
         {
           Console.WriteLine("");
@@ -241,6 +246,35 @@ namespace PizzaBox.Client
         }
         
 //========================================================================= STORES
+        
+        private static string MenuForStore()
+        {
+          Console.WriteLine("===================================================================");
+          Console.WriteLine("");
+          Console.Write("Choose one of the following options");
+          Console.WriteLine("");
+          Console.WriteLine("");
+          Console.WriteLine("1) PAST ORDERS");
+          Console.WriteLine("2) SALES AND REVENUE");
+          Console.WriteLine("3) LOG OUT");
+          Console.WriteLine("");
+
+          Console.Write("Enter your option's number: ");
+          string selection = Console.ReadLine();
+          Console.WriteLine("");
+          bool check = selection == "1" || selection == "2" || selection == "3";
+              
+          while (!check)
+          {
+            Console.Write("The option you selected is not valid, please try again: ");
+            selection = Console.ReadLine();
+            Console.WriteLine("");
+            check = selection == "1" || selection == "2" || selection == "3";
+          }
+
+          return selection;
+        }
+        
         private static void StoreViewSalesAndRevenue(Store store)
         {
           Console.WriteLine("================================");
@@ -509,13 +543,8 @@ namespace PizzaBox.Client
               Console.WriteLine($"The total of your order was ${total}");
               Console.WriteLine("");
             }
-          
-              
           }
-
         }
-        
-
         private static Store ChooseAStore()
         {
           Console.WriteLine("-----------------------------");
@@ -542,7 +571,6 @@ namespace PizzaBox.Client
 
           return store;
         }
-
         private static string MenuforClient()
         {
           Console.WriteLine("===================================================================");
@@ -570,7 +598,7 @@ namespace PizzaBox.Client
 
           return selection;
         }
-
+        
         private static string MenuChoosePeriod()
         {
           Console.WriteLine("================================");
@@ -598,34 +626,6 @@ namespace PizzaBox.Client
 
           return selection;
         }
-
-
-        private static string MenuForStore()
-        {
-          Console.WriteLine("===================================================================");
-          Console.WriteLine("");
-          Console.Write("Choose one of the following options");
-          Console.WriteLine("");
-          Console.WriteLine("1) PAST ORDERS");
-          Console.WriteLine("2) SALES AND REVENUE");
-          Console.WriteLine("3) LOG OUT");
-          Console.WriteLine("");
-
-          Console.Write("Enter your option's number: ");
-          string selection = Console.ReadLine();
-          Console.WriteLine("");
-          bool check = selection == "1" || selection == "2" || selection == "3";
-              
-          while (!check)
-          {
-            Console.Write("The option you selected is not valid, please try again: ");
-            selection = Console.ReadLine();
-            Console.WriteLine("");
-            check = selection == "1" || selection == "2" || selection == "3";
-          }
-
-          return selection;
-        } 
 
         private static void ShowMenu()
         {
@@ -717,7 +717,6 @@ namespace PizzaBox.Client
               check = false;
             } 
           }
-          
           return list;
         }
 
@@ -742,8 +741,6 @@ namespace PizzaBox.Client
           {
             Console.WriteLine("Order is empty");
           }
-          
-          
         }
         
         private static List<Pizza> RemovePizza(List<Pizza> list)
@@ -882,7 +879,6 @@ namespace PizzaBox.Client
           }
            
         }
-
 
         private static void PostOrder(Store store, User user)
         {

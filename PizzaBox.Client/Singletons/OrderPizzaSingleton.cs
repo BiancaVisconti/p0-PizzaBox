@@ -33,7 +33,6 @@ namespace PizzaBox.Client.Singletons
       op.OrderId = order.OrderId;
       op.PizzaId = pizza.PizzaId;
       op.Amount = amount;
-    
       return _opr.Post(op);
     }
     

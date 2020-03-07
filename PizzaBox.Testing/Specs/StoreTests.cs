@@ -6,10 +6,11 @@ namespace PizzaBox.Testing.Specs
 {
   public class StoreTests
   {
+    StoreRepository sut = new StoreRepository();
+    
     [Fact]
     public void Test_RepositoryGet()
     {
-      var sut = new StoreRepository();
       var actual = sut.Get();
 
       Assert.True(actual != null);
@@ -20,7 +21,6 @@ namespace PizzaBox.Testing.Specs
     [InlineData("MammaMia", "13131")]
     public void Test_RepositoryCheckIfAccountExists(string n, string p)
     {
-      var sut = new StoreRepository();
       var actual = sut.CheckIfAccountExists(n, p);
 
       Assert.True(actual);
@@ -30,7 +30,6 @@ namespace PizzaBox.Testing.Specs
     [InlineData(1)]
     public void Test_RepositoryGetIdNumMenu(int n)
     {
-      var sut = new StoreRepository();
       var actual = sut.GetId(n);
 
       Assert.IsType<long>(actual);
@@ -40,7 +39,6 @@ namespace PizzaBox.Testing.Specs
     [InlineData("MammaMia", "13131")]
     public void Test_RepositoryGetIdByNamePassword(string n, string p)
     {
-      var sut = new StoreRepository();
       var actual = sut.GetId(n, p);
 
       Assert.IsType<long>(actual);
@@ -50,7 +48,6 @@ namespace PizzaBox.Testing.Specs
     [InlineData("MammaMia", "13131")]
     public void Test_RepositoryGetStore(string n, string p)
     {
-      var sut = new StoreRepository();
       var actual = sut.GetStore(n, p);
 
       Assert.IsType<Store>(actual);
@@ -60,7 +57,6 @@ namespace PizzaBox.Testing.Specs
     [InlineData(1)]
     public void Test_RepositoryGetStoreByNumMenu(int n)
     {
-      var sut = new StoreRepository();
       var actual = sut.GetStore(n);
 
       Assert.IsType<Store>(actual);
@@ -71,7 +67,6 @@ namespace PizzaBox.Testing.Specs
     [InlineData(2)]
     public void Test_RepositoryGetName(long l)
     {
-      var sut = new StoreRepository();
       var actual = sut.GetName(l);
 
       Assert.IsType<string>(actual);

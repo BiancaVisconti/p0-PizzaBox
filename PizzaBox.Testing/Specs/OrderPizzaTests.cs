@@ -6,10 +6,13 @@ namespace PizzaBox.Testing.Specs
 {
   public class OrderPizzaTests
   {
+    Order o = new Order();
+    OrderPizza op = new OrderPizza();
+    OrderPizzaRepository sut = new OrderPizzaRepository();
+    
     [Fact]
     public void Test_RepositoryGet()
     {
-      var sut = new OrderPizzaRepository();
       var actual = sut.Get();
 
       Assert.True(actual != null);
@@ -17,23 +20,22 @@ namespace PizzaBox.Testing.Specs
     }
 
     [Fact]
-    public void Test_RepositoryGetOrder(Order o)
+    public void Test_RepositoryGetOrder()
     {
-      var sut = new OrderPizzaRepository();
       var actual = sut.Get(o);
 
       Assert.True(actual != null);
       Assert.True(actual.Count >= 0);
     }
 
-    [Fact]
-    public void Test_RepositoryPost(OrderPizza op)
+    /*[Fact]
+    public void Test_RepositoryPost()
     {
-      var sut = new OrderPizzaRepository();
       var actual = sut.Post(op);
 
       Assert.True(actual);
     }
+    */
 
 
   }
