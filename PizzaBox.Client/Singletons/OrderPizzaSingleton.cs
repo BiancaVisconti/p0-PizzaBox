@@ -19,8 +19,6 @@ namespace PizzaBox.Client.Singletons
         return _ops;
       }
     }
-
-    private OrderPizzaSingleton() {}
     
     public List<OrderPizza> Get()
     {

@@ -20,8 +20,6 @@ namespace PizzaBox.Client.Singletons
       }
     }
 
-    private OrderSingleton() {}
-    
     public List<Order> Get()
     {
       return _or.Get();

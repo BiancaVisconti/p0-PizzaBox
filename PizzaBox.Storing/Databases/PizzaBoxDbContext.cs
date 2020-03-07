@@ -28,13 +28,13 @@ namespace PizzaBox.Storing.Databases
 
       builder.Entity<User>().HasData(new User[]
       {
-        new User() { UserId = 1, Name = "BiancaVisconti", Password = "bianca", Address = "Central 960"},
-        new User() { UserId = 2, Name = "SilvanaRoncagliolo", Password = "silvana", Address = "Street 4250"},
-        new User() { UserId = 3, Name = "MacarenaRodriguez", Password = "maca", Address = "Calle 13"},
-        new User() { UserId = 4, Name = "VictoriaTorres", Password = "vicky", Address = "3 Poniente"},
+        new User() { UserId = 1, Name = "Bianca", Password = "bianca", Address = "Central 960"},
+        new User() { UserId = 2, Name = "Silvana", Password = "silvana", Address = "Street 4250"},
+        new User() { UserId = 3, Name = "Macarena", Password = "maca", Address = "Calle 13"},
+        new User() { UserId = 4, Name = "Victoria", Password = "vicky", Address = "3 Poniente"},
         new User() { UserId = 5, Name = "Rufuz", Password = "beio", Address = "Avenida Beio 15"},
         new User() { UserId = 6, Name = "NancyCastro", Password = "nancy", Address = "15 Norte"},
-        new User() { UserId = 7, Name = "JennyLoe", Password = "jenny", Address = "Avenida Beio 15"},
+        new User() { UserId = 7, Name = "Jenny", Password = "jenny", Address = "Avenida Beio 15"},
         new User() { UserId = 8, Name = "Fernanda", Password = "ferna", Address = "Blanca Estela 76"},
         new User() { UserId = 9, Name = "Francisca", Password = "fran", Address = "Los Pellines 950"},
         new User() { UserId = 10, Name = "Sofia", Password = "sofia", Address = "Lomas de Montenar 1190"}
@@ -48,10 +48,10 @@ namespace PizzaBox.Storing.Databases
 
       builder.Entity<Store>().HasData(new Store[]
       {
-        new Store() { StoreId = 1, Name = "MammaMia", Password = "13131", Address = "Cooper 786", NumMenu = 1},
-        new Store() { StoreId = 2, Name = "DiegoPizza", Password = "58585", Address = "Mitchel 83", NumMenu = 2},
-        new Store() { StoreId = 3, Name = "MiPizza", Password = "lolol", Address = "Mesquite 476", NumMenu = 3},
-        new Store() { StoreId = 4, Name = "TuPizza", Password = "trole", Address = "Abram 34", NumMenu = 4},
+        new Store() { StoreId = 1, Name = "PizzaEater", Password = "eater", Address = "Cooper 786", NumMenu = 1},
+        new Store() { StoreId = 2, Name = "DiegoPizza", Password = "diego", Address = "Mitchel 83", NumMenu = 2},
+        new Store() { StoreId = 3, Name = "MiPizza", Password = "pizza", Address = "Mesquite 476", NumMenu = 3},
+        new Store() { StoreId = 4, Name = "TuPizza", Password = "pizza", Address = "Abram 34", NumMenu = 4},
         new Store() { StoreId = 5, Name = "Mangiata", Password = "comer", Address = "Cooper 132", NumMenu = 5},
         new Store() { StoreId = 6, Name = "PizzaLover", Password = "pizza", Address = "Mesquite 87", NumMenu = 6}
         
