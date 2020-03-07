@@ -1,6 +1,7 @@
 using PizzaBox.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System;
 
 namespace PizzaBox.Storing.Databases
 {
@@ -56,9 +57,9 @@ namespace PizzaBox.Storing.Databases
 
       builder.Entity<Order>().HasData(new Order[]
       {
-        new Order() { OrderId = 1, StoreId = 1, UserId = 1},
-        new Order() { OrderId = 2, StoreId = 2, UserId = 2},
-        new Order() { OrderId = 3, StoreId = 1, UserId = 2}
+        new Order() { OrderId = 1, Date = new DateTime(2020, 03, 01, 07, 09, 14), StoreId = 1, UserId = 1},
+        new Order() { OrderId = 2, Date = new DateTime(2020, 02, 17, 07, 09, 14), StoreId = 2, UserId = 2},
+        new Order() { OrderId = 3, Date = new DateTime(2020, 03, 07, 07, 09, 14), StoreId = 1, UserId = 2}
       });
       
       
@@ -70,7 +71,8 @@ namespace PizzaBox.Storing.Databases
       {
         new OrderPizza() { OrderPizzaId = 1, OrderId = 1, PizzaId = 3, Amount = 2},
         new OrderPizza() { OrderPizzaId = 2, OrderId = 1, PizzaId = 5, Amount = 3},
-        new OrderPizza() { OrderPizzaId = 3, OrderId = 2, PizzaId = 2, Amount = 1}    
+        new OrderPizza() { OrderPizzaId = 3, OrderId = 2, PizzaId = 2, Amount = 1},
+        new OrderPizza() { OrderPizzaId = 4, OrderId = 3, PizzaId = 3, Amount = 1}    
       });
       
       builder.Entity<Pizza>().HasKey(p => p.PizzaId);

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PizzaBox.Storing.Migrations
 {
-    public partial class migration6 : Migration
+    public partial class migration1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -141,32 +141,28 @@ namespace PizzaBox.Storing.Migrations
             migrationBuilder.InsertData(
                 table: "Order",
                 columns: new[] { "OrderId", "Date", "StoreId", "UserId" },
-                values: new object[] { 1L, new DateTime(2020, 3, 6, 13, 30, 44, 663, DateTimeKind.Local).AddTicks(6365), 1L, 1L });
+                values: new object[] { 1L, new DateTime(2020, 3, 1, 7, 9, 14, 0, DateTimeKind.Unspecified), 1L, 1L });
 
             migrationBuilder.InsertData(
                 table: "Order",
                 columns: new[] { "OrderId", "Date", "StoreId", "UserId" },
-                values: new object[] { 2L, new DateTime(2020, 3, 6, 13, 30, 44, 663, DateTimeKind.Local).AddTicks(6983), 2L, 2L });
+                values: new object[] { 2L, new DateTime(2020, 2, 17, 7, 9, 14, 0, DateTimeKind.Unspecified), 2L, 2L });
 
             migrationBuilder.InsertData(
                 table: "Order",
                 columns: new[] { "OrderId", "Date", "StoreId", "UserId" },
-                values: new object[] { 3L, new DateTime(2020, 3, 6, 13, 30, 44, 663, DateTimeKind.Local).AddTicks(7008), 1L, 2L });
+                values: new object[] { 3L, new DateTime(2020, 3, 7, 7, 9, 14, 0, DateTimeKind.Unspecified), 1L, 2L });
 
             migrationBuilder.InsertData(
                 table: "OrderPizza",
                 columns: new[] { "OrderPizzaId", "Amount", "OrderId", "PizzaId" },
-                values: new object[] { 1L, 2, 1L, 3L });
-
-            migrationBuilder.InsertData(
-                table: "OrderPizza",
-                columns: new[] { "OrderPizzaId", "Amount", "OrderId", "PizzaId" },
-                values: new object[] { 2L, 3, 1L, 5L });
-
-            migrationBuilder.InsertData(
-                table: "OrderPizza",
-                columns: new[] { "OrderPizzaId", "Amount", "OrderId", "PizzaId" },
-                values: new object[] { 3L, 1, 2L, 2L });
+                values: new object[,]
+                {
+                    { 1L, 2, 1L, 3L },
+                    { 2L, 3, 1L, 5L },
+                    { 3L, 1, 2L, 2L },
+                    { 4L, 1, 3L, 3L }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Order_StoreId",

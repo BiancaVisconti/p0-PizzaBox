@@ -30,10 +30,10 @@ namespace PizzaBox.Client.Singletons
     //TODO: 
     public bool Post(Store store, User user)
     {
-      var o = new Order() {
+      var o = new Order() 
+      {
         Store = store,
         User= user,
-        // OrderPizzas = pizzas
       };
 
       store.Orders = new List<Order>{o}; // p.crust = *crustId

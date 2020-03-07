@@ -10,8 +10,8 @@ using PizzaBox.Storing.Databases;
 namespace PizzaBox.Storing.Migrations
 {
     [DbContext(typeof(PizzaBoxDbContext))]
-    [Migration("20200306193044_migration6")]
-    partial class migration6
+    [Migration("20200307014335_migration1")]
+    partial class migration1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,21 +47,21 @@ namespace PizzaBox.Storing.Migrations
                         new
                         {
                             OrderId = 1L,
-                            Date = new DateTime(2020, 3, 6, 13, 30, 44, 663, DateTimeKind.Local).AddTicks(6365),
+                            Date = new DateTime(2020, 3, 1, 7, 9, 14, 0, DateTimeKind.Unspecified),
                             StoreId = 1L,
                             UserId = 1L
                         },
                         new
                         {
                             OrderId = 2L,
-                            Date = new DateTime(2020, 3, 6, 13, 30, 44, 663, DateTimeKind.Local).AddTicks(6983),
+                            Date = new DateTime(2020, 2, 17, 7, 9, 14, 0, DateTimeKind.Unspecified),
                             StoreId = 2L,
                             UserId = 2L
                         },
                         new
                         {
                             OrderId = 3L,
-                            Date = new DateTime(2020, 3, 6, 13, 30, 44, 663, DateTimeKind.Local).AddTicks(7008),
+                            Date = new DateTime(2020, 3, 7, 7, 9, 14, 0, DateTimeKind.Unspecified),
                             StoreId = 1L,
                             UserId = 2L
                         });
@@ -110,6 +110,13 @@ namespace PizzaBox.Storing.Migrations
                             Amount = 1,
                             OrderId = 2L,
                             PizzaId = 2L
+                        },
+                        new
+                        {
+                            OrderPizzaId = 4L,
+                            Amount = 1,
+                            OrderId = 3L,
+                            PizzaId = 3L
                         });
                 });
 

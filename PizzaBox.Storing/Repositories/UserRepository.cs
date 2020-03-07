@@ -9,6 +9,8 @@ namespace PizzaBox.Storing.Repositories
 {
   public class UserRepository : ARepository<User> //: IUser
   {
+    private static readonly UserRepository _ur = new UserRepository();
+
     public override List<User> Get() 
     {
 			return Table.ToList();
@@ -19,7 +21,7 @@ namespace PizzaBox.Storing.Repositories
 
 		}
 
-    private static readonly UserRepository _ur = new UserRepository();
+    
 
     public bool CheckIfAccountExists(string name, string password)
     {
@@ -45,8 +47,19 @@ namespace PizzaBox.Storing.Repositories
       return _db.User.SingleOrDefault(u => u.Name == name && u.Password == password);
     }
 
+    public string GetName(long userId)
+    {
+      string userName = (_db.User.SingleOrDefault(u => u.UserId == userId).Name);
+      
+      return userName;
+    }
 
-    // private static readonly PizzaBoxDbContext _db = new PizzaBoxDbContext();
+    // public static bool HasItBeen2Hours(long userId)
+    // {
+    //   List<Order> list = OrderRepository.Get();
+      
+    //   return _db.Order.SingleOrDefault(o => o.UserId == userId).
+    // }
 
     // public List<User> Get()
     // {

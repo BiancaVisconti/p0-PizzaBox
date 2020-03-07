@@ -8,6 +8,6 @@ namespace PizzaBox.Domain.Interfaces
 
     bool HasItBeen24Hours(long userId);
 
-    bool CheckOrders2Hours(long userId);
+    bool HasItBeen2Hours(long userId);
   }
 }

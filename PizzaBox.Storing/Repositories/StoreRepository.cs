@@ -11,6 +11,8 @@ namespace PizzaBox.Storing.Repositories
   public class StoreRepository : ARepository<Store> //: IStore
   {
 
+    private static readonly StoreRepository _sr = new StoreRepository();
+
     public override List<Store> Get() 
     {
 			return Table.ToList();
@@ -41,6 +43,11 @@ namespace PizzaBox.Storing.Repositories
       return id;
     }
 
+    public Store GetStore(string name, string password)
+    {
+      return _db.Store.SingleOrDefault(u => u.Name == name && u.Password == password);
+    }
+
     public long GetId(string name, string password)
     {
       long id = (_db.Store.SingleOrDefault(s => s.Name == name && s.Password == password).StoreId);
@@ -57,6 +64,13 @@ namespace PizzaBox.Storing.Repositories
     public Store GetStoreByNumMenu(int id)
     {
       return _db.Store.SingleOrDefault(s => s.NumMenu == id);
+    }
+
+    public string GetName(long storeId)
+    {
+      string storeName = (_db.Store.SingleOrDefault(s => s.StoreId == storeId).Name);
+      
+      return storeName;
     }
     // private static readonly PizzaBoxDbContext _db = new PizzaBoxDbContext();
 
