@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PizzaBox.Storing.Databases;
 
 namespace PizzaBox.Storing.Migrations
 {
     [DbContext(typeof(PizzaBoxDbContext))]
-    partial class PizzaBoxDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200307054053_migration2")]
+    partial class migration2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,7 +61,7 @@ namespace PizzaBox.Storing.Migrations
                         new
                         {
                             OrderId = 3L,
-                            Date = new DateTime(2020, 3, 5, 7, 9, 14, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2020, 3, 7, 7, 9, 14, 0, DateTimeKind.Unspecified),
                             StoreId = 1L,
                             UserId = 2L
                         },

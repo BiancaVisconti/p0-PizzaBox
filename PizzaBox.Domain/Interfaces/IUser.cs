@@ -1,13 +1,17 @@
 using System.Collections.Generic;
+using PizzaBox.Domain.Models;
 
 namespace PizzaBox.Domain.Interfaces
 {
   public interface IUser
   {
-    //List<Order> ViewOrdersHistory(long UserId);
+    bool CheckIfAccountExists(string name, string password);
 
-    bool HasItBeen24Hours(long userId);
+    long GetId(string name, string password);
 
-    bool HasItBeen2Hours(long userId);
+    User GetUser(string name, string password);
+
+    string GetName(long userId);
+ 
   }
 }

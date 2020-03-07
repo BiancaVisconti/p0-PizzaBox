@@ -8,7 +8,7 @@ using PizzaBox.Storing.Databases;
 
 namespace PizzaBox.Storing.Repositories
 {
-  public class StoreRepository : ARepository<Store> //: IStore
+  public class StoreRepository : ARepository<Store>, IStore
   {
 
     private static readonly StoreRepository _sr = new StoreRepository();
@@ -72,23 +72,6 @@ namespace PizzaBox.Storing.Repositories
       
       return storeName;
     }
-    // private static readonly PizzaBoxDbContext _db = new PizzaBoxDbContext();
-
-    // public List<Store> Get()
-    // {
-    //   return _db.Store.ToList();
-    // }
-
-    // public Store Get(long id)
-    // {
-    //   return _db.Store.SingleOrDefault(s => s.StoreId == id);
-    // }
-  
-    // //INSERT
-    // public bool Post(Store store)
-    // {
-    //   _db.Store.Add(store);
-    //   return _db.SaveChanges() == 1;
-    // }
+ 
   }
 }

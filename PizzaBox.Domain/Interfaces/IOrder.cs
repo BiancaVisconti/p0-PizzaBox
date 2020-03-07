@@ -5,11 +5,12 @@ namespace PizzaBox.Domain.Interfaces
 {
   public interface IOrder
   {
-    List<Pizza> ViewPizzasInOrder(long id);
-
-    int ComputeOrderTotalCost(int id);
-
-    bool AddOrder(List<Pizza> list, long storeid, long userid);
+    List<Order> Get(Store store);
+    List<Order> GetPeriod(Store store, double days);
+    List<Order> GetPeriod(User user, double days);
+    int Get2Hours(User user);
+    int Get24HoursAtStore(User user, Store store);
+    List<Order> Get(User user);
   }
 
 }

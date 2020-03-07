@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
+using PizzaBox.Domain.Interfaces;
 using PizzaBox.Domain.Models;
 
 namespace PizzaBox.Storing.Repositories
 {
-  public class OrderPizzaRepository : ARepository<OrderPizza>
+  public class OrderPizzaRepository : ARepository<OrderPizza>, IOrderPizza
   {
     private static readonly OrderPizzaRepository _opr = new OrderPizzaRepository();
 

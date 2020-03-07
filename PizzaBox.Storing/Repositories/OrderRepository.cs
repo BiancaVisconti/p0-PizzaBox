@@ -8,7 +8,7 @@ using PizzaBox.Storing.Databases;
 
 namespace PizzaBox.Storing.Repositories
 {
-  public class OrderRepository : ARepository<Order> //: IOrder
+  public class OrderRepository : ARepository<Order>, IOrder
   {
 
     private static readonly OrderRepository _or = new OrderRepository();
@@ -18,7 +18,6 @@ namespace PizzaBox.Storing.Repositories
     public override List<Order> Get() 
     {
 			return Table.ToList();
-
     }
 
     public OrderRepository() : base(_db.Order) 
@@ -43,30 +42,51 @@ namespace PizzaBox.Storing.Repositories
     public List<Order> GetPeriod(User user, double days)
     {
       List<Order> list = (_db.Order.Where(o => o.UserId == user.UserId && o.Date.AddHours(days*24) >= DateTime.Now).ToList());
-      
+
       return list;
+    }
+
+    public int Get2Hours(User user)
+    {
+      List<Order> list = Get(user);
+      int count = 0;
+
+      foreach (var o in list)
+      {
+          double minutes = DateTime.Now.Subtract(o.Date).TotalMinutes;
+
+          if (minutes < 2*60)
+          {
+            count++;
+          }
+      }
+      return count;
+    }
+
+    public int Get24HoursAtStore(User user, Store store)
+    {
+      List<Order> list = (_db.Order.Where(o => o.UserId == user.UserId && o.StoreId != store.StoreId).ToList());
+      int count = 0;
+      foreach (var o in list)
+      {
+          double minutes = DateTime.Now.Subtract(o.Date).TotalMinutes;
+
+          if (minutes < 24*60)
+          {
+            count++;
+          }
+      }
+      return count;
     }
     
 
     public List<Order> Get(User user)
     {
       List<Order> list = (_db.Order.Where(o => o.UserId == user.UserId).ToList());
-      
       return list;
     }
 
 
-    //private static readonly PizzaBoxDbContext _db = new PizzaBoxDbContext();
-
-    // public List<Order> Get()
-    // {
-    //   return _db.Order.Include(o => o.OrderPizzas).Include(o => o.Date).Include(o => o.NumOfPizza).ToList();
-    // }
-
-    // public Order Get(long id)
-    // {
-    //   return _db.Order.SingleOrDefault(o => o.OrderId == id);
-    // }
   
     // //INSERT
     // public bool Post(Order order)

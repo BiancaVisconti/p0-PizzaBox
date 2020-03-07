@@ -44,7 +44,7 @@ namespace PizzaBox.Storing.Databases
       {
         new Store() { StoreId = 1, Name = "MammaMía", Password = "13131", Address = "Cooper 786", NumMenu = 1},
         new Store() { StoreId = 2, Name = "DiegoPizza", Password = "58585", Address = "Mitchel 83", NumMenu = 2},
-        new Store() { StoreId = 3, Name = "MyPizza", Password = "lolol", Address = "Mesquite 476", NumMenu = 3},
+        new Store() { StoreId = 3, Name = "MiPizza", Password = "lolol", Address = "Mesquite 476", NumMenu = 3},
         new Store() { StoreId = 4, Name = "TuPizza", Password = "trole", Address = "Abram 34", NumMenu = 4}
         
       });
@@ -59,7 +59,9 @@ namespace PizzaBox.Storing.Databases
       {
         new Order() { OrderId = 1, Date = new DateTime(2020, 03, 01, 07, 09, 14), StoreId = 1, UserId = 1},
         new Order() { OrderId = 2, Date = new DateTime(2020, 02, 17, 07, 09, 14), StoreId = 2, UserId = 2},
-        new Order() { OrderId = 3, Date = new DateTime(2020, 03, 07, 07, 09, 14), StoreId = 1, UserId = 2}
+        new Order() { OrderId = 3, Date = new DateTime(2020, 03, 05, 07, 09, 14), StoreId = 1, UserId = 2},
+        new Order() { OrderId = 4, Date = new DateTime(2020, 03, 06, 23, 00, 00), StoreId = 1, UserId = 1},
+        new Order() { OrderId = 5, Date = new DateTime(2020, 03, 06, 10, 09, 00), StoreId = 2, UserId = 2}
       });
       
       
@@ -72,7 +74,9 @@ namespace PizzaBox.Storing.Databases
         new OrderPizza() { OrderPizzaId = 1, OrderId = 1, PizzaId = 3, Amount = 2},
         new OrderPizza() { OrderPizzaId = 2, OrderId = 1, PizzaId = 5, Amount = 3},
         new OrderPizza() { OrderPizzaId = 3, OrderId = 2, PizzaId = 2, Amount = 1},
-        new OrderPizza() { OrderPizzaId = 4, OrderId = 3, PizzaId = 3, Amount = 1}    
+        new OrderPizza() { OrderPizzaId = 4, OrderId = 3, PizzaId = 3, Amount = 1},
+        new OrderPizza() { OrderPizzaId = 5, OrderId = 4, PizzaId = 6, Amount = 2},
+        new OrderPizza() { OrderPizzaId = 6, OrderId = 5, PizzaId = 2, Amount = 1}      
       });
       
       builder.Entity<Pizza>().HasKey(p => p.PizzaId);

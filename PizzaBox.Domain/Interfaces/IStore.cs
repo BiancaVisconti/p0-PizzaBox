@@ -1,20 +1,22 @@
 using System.Collections.Generic;
+using PizzaBox.Domain.Models;
 
 namespace PizzaBox.Domain.Interfaces
 {
   public interface IStore
   {
-    //List<Order> ViewCompletedOrders(long StoreId)
+    bool CheckIfAccountExists(string name, string password);
 
+    long GetId(int numMenu);
 
-    int SalesNum(long id);
+    Store GetStore(string name, string password);
 
-    int SalesRevenue(long id);
+    long GetId(string name, string password);
 
-    int TotalInventoryPerPizza(long id);
+    Store GetStore(int numMenu);
 
-    bool AddNewPizzaToMenu(string name);
+    Store GetStoreByNumMenu(int id);
 
-    bool RemovePizzaFromMenu(string name);
+    string GetName(long storeId);
   }
 }

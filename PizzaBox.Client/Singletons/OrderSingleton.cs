@@ -36,7 +36,7 @@ namespace PizzaBox.Client.Singletons
         User= user,
       };
 
-      store.Orders = new List<Order>{o}; // p.crust = *crustId
+      store.Orders = new List<Order>{o};
       user.Orders = new List<Order>{o};
       
 
