@@ -159,7 +159,7 @@ namespace PizzaBox.Client
         private static string ClientOrStore()
         {
           Console.WriteLine("");
-          Console.WriteLine("Welcome to Arlington's Fastest Pizza Delivery!");
+          Console.WriteLine("WELCOME TO ARLINGTON'S FASTEST PIZZA DELIVERY APP!");
           Console.WriteLine("");
           Console.WriteLine("Are you a client or a store?");
           Console.WriteLine("");
@@ -248,6 +248,7 @@ namespace PizzaBox.Client
           else
           {
             Console.WriteLine("Sales and Revenue of all times");
+            Console.WriteLine("------------------------------");
             Console.WriteLine("");
             decimal totalRevenue = 0;
             int totalAmount = 0;
@@ -288,6 +289,7 @@ namespace PizzaBox.Client
           else
           {
             Console.WriteLine($"Sales and Revenue of the last {days} days");
+            Console.WriteLine("--------------------------------------");
             Console.WriteLine("");
             decimal totalRevenue = 0;
             int totalAmount = 0;
@@ -329,12 +331,14 @@ namespace PizzaBox.Client
           {
             int count = 1;
             Console.WriteLine($"Orders of the last {days} days");
+            Console.WriteLine("--------------------------");
             Console.WriteLine("");
 
             foreach (var o in listOrders)
             {
               decimal total = 0;
-              Console.WriteLine($"Order {count}");
+              Console.WriteLine($"Order {count} {o.Date}");
+              Console.WriteLine("--------");
               Console.WriteLine("");
               long userId = o.UserId;
               string nameUser = _ur.GetName(userId);
@@ -374,11 +378,13 @@ namespace PizzaBox.Client
           {
             int count = 1;
             Console.WriteLine($"Orders of all times");
-
+            Console.WriteLine("--------------------");
+            Console.WriteLine("");
             foreach (var o in listOrders)
             {
               decimal total = 0;
-              Console.WriteLine($"Order {count}");
+              Console.WriteLine($"Order {count} {o.Date}");
+              Console.WriteLine("--------");
               Console.WriteLine("");
               long userId = o.UserId;
               string nameUser = _ur.GetName(userId);
@@ -419,11 +425,14 @@ namespace PizzaBox.Client
           else
           {
             int count = 1;
-
+            Console.WriteLine($"Orders of all times");
+            Console.WriteLine("--------------------");
+            Console.WriteLine("");
             foreach (var o in listOrders)
             {
               decimal total = 0;
-              Console.WriteLine($"Order {count}");
+              Console.WriteLine($"Order {count} {o.Date}");
+              Console.WriteLine("--------");
               Console.WriteLine("");
               long storeId = o.StoreId;
               string nameStore = _sr.GetName(storeId);
@@ -463,11 +472,13 @@ namespace PizzaBox.Client
           {
             int count = 1;
             Console.WriteLine($"Orders of the last {days} days");
+            Console.WriteLine("--------------------------");
             Console.WriteLine("");
             foreach (var o in listOrders)
             {
               decimal total = 0;
-              Console.WriteLine($"Order {count}");
+              Console.WriteLine($"Order {count} {o.Date}");
+              Console.WriteLine("--------");
               Console.WriteLine("");
               long storeId = o.StoreId;
               string nameStore = _sr.GetName(storeId);
@@ -704,7 +715,7 @@ namespace PizzaBox.Client
           {
             Console.WriteLine("-----------------------------");
             Console.WriteLine("");
-            Console.WriteLine("This is your order so far:");
+            Console.WriteLine("THIS IS YOUR ORDER SO FAR:");
             Console.WriteLine("");
             foreach (var p in list)            
             {
@@ -778,7 +789,7 @@ namespace PizzaBox.Client
           {
             Console.WriteLine("-----------------------------");
             Console.WriteLine("");
-            Console.WriteLine("This is your final order:");
+            Console.WriteLine("THIS IS YOUR FINAL ORDER:");
             Console.WriteLine("");
             foreach (var p in list)            
             {
