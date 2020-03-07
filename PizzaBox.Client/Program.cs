@@ -9,7 +9,7 @@ namespace PizzaBox.Client
 {
   internal class Program
     {
-        private static readonly PizzeriaSingleton _ps = PizzeriaSingleton.Instance;
+        //private static readonly PizzeriaSingleton _ps = PizzeriaSingleton.Instance;
 
         private static readonly OrderSingleton _os = OrderSingleton.Instance;
 
@@ -89,7 +89,7 @@ namespace PizzaBox.Client
                     Console.WriteLine("");
                     Console.WriteLine("YOU MADE AN ORDER WITHIN THE LAST 24 HOURS IN ANOTHER STORE");
                     Console.WriteLine("");
-                    Console.WriteLine("REMEMBER, FOR THE FIRST 24 HOURS YOU CAN ONLY ORDER PIZZA FROM THE SAME PIZZERIA");
+                    Console.WriteLine("FOR THE FIRST 24 HOURS YOU CAN ONLY ORDER PIZZA FROM THE SAME PIZZERIA");
                     Console.WriteLine("");
                   } 
                 }
@@ -99,7 +99,7 @@ namespace PizzaBox.Client
                   Console.WriteLine("");
                   Console.WriteLine("YOU MADE AN ORDER WITHIN THE LAST 2 HOURS, YOU CANNOT ORDER NOW");
                   Console.WriteLine("");
-                  Console.WriteLine("REMEMBER, FOR THE FIRST 24 HOURS YOU CAN ONLY ORDER PIZZA FROM THE SAME PIZZERIA");
+                  Console.WriteLine("FOR THE FIRST 24 HOURS YOU CAN ONLY ORDER PIZZA FROM THE SAME PIZZERIA");
                   Console.WriteLine("");
                 }
                 
@@ -107,6 +107,7 @@ namespace PizzaBox.Client
               else if (optionUser == "3")
               {
                 Console.WriteLine($"Bye {user.Name}, hope to see you soon!");
+                Console.WriteLine("");
                 finishMenu = true;
               }
             }
@@ -156,6 +157,7 @@ namespace PizzaBox.Client
               else if (optionStore == "3")
               {
                 Console.WriteLine($"Bye {store.Name}, hope to see you soon!");
+                Console.WriteLine("");
                 finishMenu = true;
               }
             }
@@ -274,6 +276,29 @@ namespace PizzaBox.Client
 
           return selection;
         }
+
+        private static Dictionary<long, int> CalculateSalesAndRevenue(List<Order> listOrders)
+        {
+          Dictionary<long, int> RepeatedPizzaSales = new Dictionary<long, int>();
+
+          foreach (var o in listOrders)
+          {
+            List<OrderPizza> listOrderPizza = _opr.Get(o);
+            for (int i = 0; i < listOrderPizza.Count(); i++)
+            {
+              if (RepeatedPizzaSales.ContainsKey(listOrderPizza[i].PizzaId))
+              {
+                RepeatedPizzaSales[listOrderPizza[i].PizzaId] += listOrderPizza[i].Amount;
+              }
+              else
+              {
+                RepeatedPizzaSales.Add(listOrderPizza[i].PizzaId, listOrderPizza[i].Amount);
+              }
+            }  
+          }
+
+          return RepeatedPizzaSales;
+        }
         
         private static void StoreViewSalesAndRevenue(Store store)
         {
@@ -292,25 +317,21 @@ namespace PizzaBox.Client
             Console.WriteLine("");
             decimal totalRevenue = 0;
             int totalAmount = 0;
-            foreach (var o in listOrders)
+            Dictionary<long, int> RepeatedPizzaSales = CalculateSalesAndRevenue(listOrders);
+            foreach (var p in RepeatedPizzaSales)
             {
-              List<OrderPizza> listOrderPizza = _opr.Get(o);
-              foreach (var p in listOrderPizza)
-              {
-                totalAmount += p.Amount;
-                int amount = p.Amount;
-                long pizzaId = p.PizzaId;
-                string namePizza = _pr.GetName(pizzaId);
-                decimal price = _pr.GetPrice(pizzaId);
-                totalRevenue += amount*price;
-                decimal revenue = amount*price;
-                Console.WriteLine($"{amount} {namePizza} ${revenue}");
-                  
-              }
+              totalAmount += p.Value;
+              int amount = p.Value;
+              string namePizza = _pr.GetName(p.Key);
+              decimal price = _pr.GetPrice(p.Key);
+              totalRevenue += amount*price;
+              decimal revenue = amount*price;
+              Console.WriteLine($"{amount} {namePizza} ${revenue}");   
             }
+
             Console.WriteLine("");
-            Console.WriteLine($"Total number of pizzas sold: {totalAmount}");
-            Console.WriteLine($"Total revenue: ${totalRevenue}");
+            Console.WriteLine($"TOTAL NUMBER OF PIZZAS SOLD: {totalAmount}");
+            Console.WriteLine($"TOTAL REVENUE: ${totalRevenue}");
             Console.WriteLine("");  
           }
 
@@ -496,10 +517,7 @@ namespace PizzaBox.Client
               Console.WriteLine($"The total of your order was ${total}");
               Console.WriteLine("");
             }
-          
-              
           }
-
         }
         private static void ClientViewCompletedOrdersByPeriod(User user, double days)
         {
@@ -595,7 +613,6 @@ namespace PizzaBox.Client
             Console.WriteLine("");
             check = selection == "1" || selection == "2" || selection == "3";
           }
-
           return selection;
         }
         
@@ -734,7 +751,7 @@ namespace PizzaBox.Client
             } 
             decimal sumPrices = list.Sum(l => l.Price);
             Console.WriteLine("");
-            Console.WriteLine($"Your total so far is {sumPrices}");
+            Console.WriteLine($"Your total so far is ${sumPrices}");
             Console.WriteLine("");
           }
           else
@@ -806,7 +823,7 @@ namespace PizzaBox.Client
             }
             decimal sumPrices2 = list.Sum(l => l.Price);
             Console.WriteLine("");
-            Console.WriteLine($"Your total is {sumPrices2}");
+            Console.WriteLine($"Your total is ${sumPrices2}");
             Console.WriteLine(""); 
             Console.WriteLine($"{user.Name}, your order is on its way, enjoy!");
             Console.WriteLine("");
