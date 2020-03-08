@@ -27,7 +27,6 @@ namespace PizzaBox.Domain.Models
     public override string ToString()
     {
       return $"{NumMenu}) ${Price} {Name} {Description} ";
-      
     }
 
     public override long GetId()

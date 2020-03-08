@@ -19,14 +19,11 @@ namespace PizzaBox.Domain.Models
     public override string ToString()
     {
       return $"{UserId} {Name} {Address}";
-      
     }
 
     public override long GetId()
     {
       return UserId;
     }
-
   }
-  
 }

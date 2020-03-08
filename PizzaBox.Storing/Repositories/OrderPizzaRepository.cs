@@ -12,7 +12,6 @@ namespace PizzaBox.Storing.Repositories
     public List<OrderPizza> Get() 
     {
 			return _db.OrderPizza.ToList();
-
     }
 
     public List<OrderPizza> Get(Order order)

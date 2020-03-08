@@ -31,14 +31,11 @@ namespace PizzaBox.Domain.Models
       OrderId = DateTime.Now.Ticks;
 
       Date = DateTime.Now;
-      
     }
 
     public override long GetId()
     {
       return OrderId;
     }
-
   }
-
 }

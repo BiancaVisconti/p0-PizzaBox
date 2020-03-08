@@ -26,7 +26,5 @@ namespace PizzaBox.Domain.Models
     {
       return StoreId;
     }
-
   }
-  
 }
