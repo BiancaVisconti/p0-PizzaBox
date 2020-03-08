@@ -26,7 +26,6 @@ namespace PizzaBox.Client.Singletons
       }
     }
 
-
      public void DoAll()
 
         {
@@ -161,11 +160,8 @@ namespace PizzaBox.Client.Singletons
             
         }
 
-
-
-//========================================================================= LOGIN
-        
-        private static string ClientOrStore()
+//========================================================================= LOGIN        
+        public static string ClientOrStore()
         {
           Console.WriteLine("");
           Console.WriteLine("WELCOME TO ARLINGTON'S FASTEST PIZZA DELIVERY APP!");
@@ -189,12 +185,14 @@ namespace PizzaBox.Client.Singletons
           return who;
         }
         
-        private static User LoginUser()
+        public static User LoginUser()
         {
-          Console.Write("Please enter you username: ");
+          Console.WriteLine("--------------------------");
+          Console.Write("PLEASE ENTER YOUR USERNAME: ");
           string client = Console.ReadLine();
-          Console.Write("Please enter you password: ");
+          Console.Write("PLEASE ENTER YOUR PASSWORD: ");
           string cli_password = Console.ReadLine();
+          Console.WriteLine("--------------------------");
           Console.WriteLine("");
           bool check2 = _ur.CheckIfAccountExists(client, cli_password);
 
@@ -202,10 +200,12 @@ namespace PizzaBox.Client.Singletons
           {
             Console.WriteLine("Invalid input, please try again");
             Console.WriteLine("");
-            Console.Write("Please enter you username again: ");
+            Console.WriteLine("--------------------------");
+            Console.Write("PLEASE ENTER YOUR USERNAME AGAIN: ");
             client = Console.ReadLine();
-            Console.Write("Please enter you password again: ");
+            Console.Write("PLEASE ENTER YOUR PASSWORD AGAIN: ");
             cli_password = Console.ReadLine();
+            Console.WriteLine("--------------------------");
             Console.WriteLine("");
             check2 = _ur.CheckIfAccountExists(client, cli_password);
           }
@@ -215,12 +215,14 @@ namespace PizzaBox.Client.Singletons
           return user;
         }
 
-        private static Store LoginStore()
+        public static Store LoginStore()
         {
-          Console.Write("Please enter you username: ");
+          Console.WriteLine("--------------------------");
+          Console.Write("PLEASE ENTER YOUR USERNAME: ");
           string store = Console.ReadLine();
-          Console.Write("Please enter you password: ");
+          Console.Write("PLEASE ENTER YOUR PASSWORD: ");
           string store_password = Console.ReadLine();
+          Console.WriteLine("--------------------------");
           Console.WriteLine("");
           bool check2 = _sr.CheckIfAccountExists(store, store_password);
 
@@ -228,10 +230,12 @@ namespace PizzaBox.Client.Singletons
           {
             Console.WriteLine("Invalid input, please try again");
             Console.WriteLine("");
-            Console.Write("Please enter you username again: ");
+            Console.WriteLine("--------------------------");
+            Console.Write("PLEASE ENTER YOUR USERNAME AGAIN: ");
             store = Console.ReadLine();
-            Console.Write("Please enter you password again: ");
+            Console.Write("PLEASE ENTER YOUR PASSWORD AGAIN: ");
             store_password = Console.ReadLine();
+            Console.WriteLine("--------------------------");
             Console.WriteLine("");
             check2 = _sr.CheckIfAccountExists(store, store_password);
           }
@@ -242,8 +246,7 @@ namespace PizzaBox.Client.Singletons
         }
         
 //========================================================================= STORES
-        
-        private static string MenuForStore()
+        public static string MenuForStore()
         {
           Console.WriteLine("===================================================================");
           Console.WriteLine("");
@@ -271,7 +274,7 @@ namespace PizzaBox.Client.Singletons
           return selection;
         }
 
-        private static Dictionary<long, int> CalculateSalesAndRevenue(List<Order> listOrders)
+        public static Dictionary<long, int> CalculateSalesAndRevenue(List<Order> listOrders)
         {
           Dictionary<long, int> RepeatedPizzaSales = new Dictionary<long, int>();
 
@@ -294,14 +297,14 @@ namespace PizzaBox.Client.Singletons
           return RepeatedPizzaSales;
         }
         
-        private static void StoreViewSalesAndRevenue(Store store)
+        public static void StoreViewSalesAndRevenue(Store store)
         {
           Console.WriteLine("================================");
           Console.WriteLine("");
           List<Order> listOrders = _or.Get(store);
           if (listOrders.Count == 0)
           {
-            Console.WriteLine("You don't have any sales so far");
+            Console.WriteLine("YOU DON'T HAVE ANY SALES SO FAR");
             Console.WriteLine("");
           }
           else
@@ -330,39 +333,34 @@ namespace PizzaBox.Client.Singletons
           }
 
         }
-
-        private static void StoreViewSalesAndRevenuePerPeriod(Store store, double days)
+        
+        public static void StoreViewSalesAndRevenuePerPeriod(Store store, double days)
         {
           Console.WriteLine("================================");
           Console.WriteLine("");
           List<Order> listOrders = _or.GetPeriod(store, days);
           if (listOrders.Count == 0)
           {
-            Console.WriteLine($"You don't have any sales in the last {days} days");
+            Console.WriteLine($"YOU DON'T HAVE ANY SALES IN THE LAST {days} DAYS");
             Console.WriteLine("");
           }
           else
           {
-            Console.WriteLine($"Sales and Revenue of the last {days} days");
+            Console.WriteLine($"SALES AND REVENUE OF THE LAST {days} DAYS");
             Console.WriteLine("--------------------------------------");
             Console.WriteLine("");
             decimal totalRevenue = 0;
             int totalAmount = 0;
-            foreach (var o in listOrders)
+            Dictionary<long, int> RepeatedPizzaSales = CalculateSalesAndRevenue(listOrders);
+            foreach (var p in RepeatedPizzaSales)
             {
-              List<OrderPizza> listOrderPizza = _opr.Get(o);
-              foreach (var p in listOrderPizza)
-              {
-                totalAmount += p.Amount;
-                int amount = p.Amount;
-                long pizzaId = p.PizzaId;
-                string namePizza = _pr.GetName(pizzaId);
-                decimal price = _pr.GetPrice(pizzaId);
-                totalRevenue += amount*price;
-                decimal revenue = amount*price;
-                Console.WriteLine($"{amount} {namePizza} ${revenue}");
-                  
-              }
+              totalAmount += p.Value;
+              int amount = p.Value;
+              string namePizza = _pr.GetName(p.Key);
+              decimal price = _pr.GetPrice(p.Key);
+              totalRevenue += amount*price;
+              decimal revenue = amount*price;
+              Console.WriteLine($"{amount} {namePizza} ${revenue}");   
             }
             Console.WriteLine("");
             Console.WriteLine($"Total number of pizzas sold: {totalAmount}");
@@ -372,7 +370,7 @@ namespace PizzaBox.Client.Singletons
 
         }
 
-        private static void StoreViewCompletedOrdersPeriod(Store store, double days)
+        public static void StoreViewCompletedOrdersPeriod(Store store, double days)
         {
           Console.WriteLine("================================");
           Console.WriteLine("");
@@ -420,7 +418,7 @@ namespace PizzaBox.Client.Singletons
           }
 
         }
-        private static void StoreViewCompletedOrders(Store store)
+        public static void StoreViewCompletedOrders(Store store)
         {
           Console.WriteLine("================================");
           Console.WriteLine("");
@@ -454,22 +452,18 @@ namespace PizzaBox.Client.Singletons
                 string namePizza = _pr.GetName(pizzaId);
                 decimal price = _pr.GetPrice(pizzaId);
                 total += amount*price;
-                Console.WriteLine($"{amount} {namePizza} ${price*amount}");
-                  
+                Console.WriteLine($"{amount} {namePizza} ${price*amount}"); 
               }
               count += 1;
               Console.WriteLine("");
               Console.WriteLine($"The total of the order was ${total}");
               Console.WriteLine("");
-            }
-          
-              
+            }    
           }
-
         }
         
 //======================================================================== CLIENTS        
-        private static void ClientViewCompletedOrders(User user)
+        public static void ClientViewCompletedOrders(User user)
         {
           Console.WriteLine("================================");
           Console.WriteLine("");
@@ -513,7 +507,8 @@ namespace PizzaBox.Client.Singletons
             }
           }
         }
-        private static void ClientViewCompletedOrdersByPeriod(User user, double days)
+        
+        public static void ClientViewCompletedOrdersByPeriod(User user, double days)
         {
           Console.WriteLine("================================");
           Console.WriteLine("");
@@ -557,7 +552,8 @@ namespace PizzaBox.Client.Singletons
             }
           }
         }
-        private static Store ChooseAStore()
+        
+        public static Store ChooseAStore()
         {
           Console.WriteLine("-----------------------------");
           Console.WriteLine("");
@@ -583,7 +579,8 @@ namespace PizzaBox.Client.Singletons
 
           return store;
         }
-        private static string MenuforClient()
+        
+        public static string MenuforClient()
         {
           Console.WriteLine("===================================================================");
           Console.WriteLine("");
@@ -610,7 +607,7 @@ namespace PizzaBox.Client.Singletons
           return selection;
         }
         
-        private static string MenuChoosePeriod()
+        public static string MenuChoosePeriod()
         {
           Console.WriteLine("================================");
           Console.WriteLine("");
@@ -637,16 +634,16 @@ namespace PizzaBox.Client.Singletons
 
           return selection;
         }
-
-        private static void ShowMenu()
+        
+        public static void ShowMenu()
         {
           foreach (var p in _pr.Get())
           {
             Console.WriteLine(p);
           }
         }
-
-        private static void ShowStores()
+        
+        public static void ShowStores()
         {
           foreach (var s in _sr.Get())
           {
@@ -654,7 +651,7 @@ namespace PizzaBox.Client.Singletons
           }
         }
 
-        private static List<Pizza> PreOrder(User user)
+        public static List<Pizza> PreOrder(User user)
         {
           List<Pizza> list = new List<Pizza>();
           decimal maxTotal = 250M;                 // *** MAXTOTAL = 250
@@ -719,7 +716,6 @@ namespace PizzaBox.Client.Singletons
                 CheckOut(list, user);
                 check = false;
               }
-            
             }
             else //tempAmount == maxTotalAmount
             {
@@ -731,7 +727,7 @@ namespace PizzaBox.Client.Singletons
           return list;
         }
 
-        private static void PrintPartialOrder(List<Pizza> list)
+        public static void PrintPartialOrder(List<Pizza> list)
         {
           if (list.Count > 0)
           {
@@ -754,7 +750,7 @@ namespace PizzaBox.Client.Singletons
           }
         }
         
-        private static List<Pizza> RemovePizza(List<Pizza> list)
+        public static List<Pizza> RemovePizza(List<Pizza> list)
         {
           if (list.Count > 0)
           {
@@ -767,8 +763,8 @@ namespace PizzaBox.Client.Singletons
 
           return list;
         }
-
-        private static bool HasItBeenMoreThan2Hours(User user)
+        
+        public static bool HasItBeenMoreThan2Hours(User user)
         {
           bool check = true;
           List<Order> list = _or.Get(user);
@@ -776,7 +772,6 @@ namespace PizzaBox.Client.Singletons
           {
             
             DateTime date = new DateTime(2020, 03, 07, 04, 00, 00);
-            //double minutes = DateTime.Now.Subtract(o.Date).TotalMinutes;
             double minutes = date.Subtract(o.Date).TotalMinutes;
 
             if (minutes < 2*60)
@@ -787,7 +782,7 @@ namespace PizzaBox.Client.Singletons
           return check;
         } 
 
-        private static bool HasItBeenMoreThan24Hours(User user, Store store)
+        public static bool HasItBeenMoreThan24Hours(User user, Store store)
         {
           bool check = true;
           List<Order> list = _or.Get(user);
@@ -800,10 +795,9 @@ namespace PizzaBox.Client.Singletons
             }
           }
           return check;
-
         }
-
-        private static void CheckOut(List<Pizza> list, User user)
+        
+        public static void CheckOut(List<Pizza> list, User user)
         {
           if (list.Count > 0)
           {
@@ -824,18 +818,16 @@ namespace PizzaBox.Client.Singletons
           }
           else
           {
-            Console.WriteLine("No order has been placed");
+            Console.WriteLine("NO ORDER HAS BEEN PLACED");
           }
-
         }
-
-        private static int SelectPizza()
+        
+        public static int SelectPizza()
         {
           Console.Write("Enter your pizza's number: ");
           string selection_pizza = Console.ReadLine();
           Console.WriteLine("");
           bool check = CheckIfNumMenuPizzaIsValid(selection_pizza);
-            
           while (!check)
           {
             Console.Write("The option you selected is not valid, please try again: ");
@@ -846,8 +838,8 @@ namespace PizzaBox.Client.Singletons
           }
           return Int32.Parse(selection_pizza);
         }
-
-        private static bool CheckIfNumMenuPizzaIsValid(string nuMenu)
+        
+        public static bool CheckIfNumMenuPizzaIsValid(string nuMenu)
         {
           int result;
           if (int.TryParse(nuMenu, out result))
@@ -865,12 +857,10 @@ namespace PizzaBox.Client.Singletons
           else
           {
             return false;
-          }
-          
-          
+          }          
         }
 
-        private static bool CheckIfNumLocationIsValid(string nuMenu)
+        public static bool CheckIfNumLocationIsValid(string nuMenu)
         {
           int result;
           if (int.TryParse(nuMenu, out result))
@@ -888,20 +878,19 @@ namespace PizzaBox.Client.Singletons
           else{
             return false;
           }
-           
         }
-
-        private static void PostOrder(Store store, User user)
+       
+        public static void PostOrder(Store store, User user)
         {
           _os.Post(store, user);
         }
 
-        private static void PostOrderPizza(Order order, Pizza pizza, int amount)
+        public static void PostOrderPizza(Order order, Pizza pizza, int amount)
         {
           _ops.Post(order, pizza, amount);
         }
 
-        private static Dictionary<Pizza, int> PizzaAmount(List<Pizza> list)
+        public static Dictionary<Pizza, int> PizzaAmount(List<Pizza> list)
         {
           Dictionary<Pizza, int> RepeatedPizzaOrder = new Dictionary<Pizza, int>();
 
@@ -918,6 +907,5 @@ namespace PizzaBox.Client.Singletons
           }
           return RepeatedPizzaOrder;
         }
-    
   }
 }

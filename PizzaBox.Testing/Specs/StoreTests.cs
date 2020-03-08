@@ -18,7 +18,7 @@ namespace PizzaBox.Testing.Specs
     }
 
     [Theory]
-    [InlineData("MammaMia", "13131")]
+    [InlineData("MiPizza", "pizza")]
     public void Test_RepositoryCheckIfAccountExists(string n, string p)
     {
       var actual = sut.CheckIfAccountExists(n, p);
@@ -36,7 +36,7 @@ namespace PizzaBox.Testing.Specs
     }
 
     [Theory]
-    [InlineData("MammaMia", "13131")]
+    [InlineData("MiPizza", "pizza")]
     public void Test_RepositoryGetIdByNamePassword(string n, string p)
     {
       var actual = sut.GetId(n, p);
@@ -45,7 +45,7 @@ namespace PizzaBox.Testing.Specs
     }
 
     [Theory]
-    [InlineData("MammaMia", "13131")]
+    [InlineData("MiPizza", "pizza")]
     public void Test_RepositoryGetStore(string n, string p)
     {
       var actual = sut.GetStore(n, p);

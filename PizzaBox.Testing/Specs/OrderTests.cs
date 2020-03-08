@@ -58,7 +58,6 @@ namespace PizzaBox.Testing.Specs
       Assert.True(actual.Count >= 0);
     }
 
-
     [Fact]
     public void Test_RepositoryGet2Hours()
     {
@@ -74,16 +73,5 @@ namespace PizzaBox.Testing.Specs
 
       Assert.True(actual >= 0);
     }
-
-    /*[Fact]
-    public void Test_RepositoryPost()
-    {
-      var actual = sut.Post(o);
-
-      Assert.True(actual);
-    }
-    */
-
-
   }
 }

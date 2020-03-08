@@ -27,16 +27,5 @@ namespace PizzaBox.Testing.Specs
       Assert.True(actual != null);
       Assert.True(actual.Count >= 0);
     }
-
-    /*[Fact]
-    public void Test_RepositoryPost()
-    {
-      var actual = sut.Post(op);
-
-      Assert.True(actual);
-    }
-    */
-
-
   }
 }
