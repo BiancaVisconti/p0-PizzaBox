@@ -253,7 +253,7 @@ namespace PizzaBox.Client.Singletons
           Console.Write("Choose one of the following options");
           Console.WriteLine("");
           Console.WriteLine("");
-          Console.WriteLine("1) SEE PAST ORDERS");
+          Console.WriteLine("1) PAST ORDERS");
           Console.WriteLine("2) SALES AND REVENUE");
           Console.WriteLine("3) LOG OUT");
           Console.WriteLine("");
@@ -587,7 +587,7 @@ namespace PizzaBox.Client.Singletons
           Console.Write("Choose one of the following options");
           Console.WriteLine("");
           Console.WriteLine("");
-          Console.WriteLine("1) SEE PAST ORDERS");
+          Console.WriteLine("1) MY PAST ORDERS");
           Console.WriteLine("2) MAKE AN ORDER");
           Console.WriteLine("3) LOG OUT");
           Console.WriteLine("");
@@ -733,7 +733,7 @@ namespace PizzaBox.Client.Singletons
           {
             Console.WriteLine("-----------------------------");
             Console.WriteLine("");
-            Console.WriteLine("THIS IS YOUR ORDER SO FAR");
+            Console.WriteLine("This is your order so far");
             Console.WriteLine("");
             foreach (var p in list)            
             {
@@ -803,7 +803,7 @@ namespace PizzaBox.Client.Singletons
           {
             Console.WriteLine("-----------------------------");
             Console.WriteLine("");
-            Console.WriteLine("THIS IS YOUR FINAL ORDER");
+            Console.WriteLine("This is your final order");
             Console.WriteLine("");
             foreach (var p in list)            
             {

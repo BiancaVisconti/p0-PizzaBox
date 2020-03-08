@@ -1,4 +1,5 @@
-﻿using PizzaBox.Client.Singletons;
+﻿using System;
+using PizzaBox.Client.Singletons;
 
 namespace PizzaBox.Client
 {

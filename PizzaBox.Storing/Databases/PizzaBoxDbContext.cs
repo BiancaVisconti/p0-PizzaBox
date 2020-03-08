@@ -65,15 +65,15 @@ namespace PizzaBox.Storing.Databases
 
       builder.Entity<Order>().HasData(new Order[]
       {
-        new Order() { OrderId = 1, Date = new DateTime(2020, 03, 01, 07, 09, 14), StoreId = 1, UserId = 1},
-        new Order() { OrderId = 2, Date = new DateTime(2020, 02, 17, 07, 09, 14), StoreId = 2, UserId = 2},
-        new Order() { OrderId = 3, Date = new DateTime(2020, 03, 05, 07, 09, 14), StoreId = 1, UserId = 2},
-        new Order() { OrderId = 4, Date = new DateTime(2020, 03, 06, 23, 00, 00), StoreId = 1, UserId = 1},
-        new Order() { OrderId = 5, Date = new DateTime(2020, 03, 06, 15, 09, 00), StoreId = 2, UserId = 2},
-        new Order() { OrderId = 6, Date = new DateTime(2020, 03, 01, 15, 00, 00), StoreId = 6, UserId = 9},
-        new Order() { OrderId = 7, Date = new DateTime(2020, 01, 06, 12, 30, 00), StoreId = 5, UserId = 10},
-        new Order() { OrderId = 8, Date = new DateTime(2019, 11, 12, 14, 25, 00), StoreId = 4, UserId = 7},
-        new Order() { OrderId = 9, Date = new DateTime(2019, 12, 31, 20, 00, 00), StoreId = 3, UserId = 8}
+        new Order() { OrderId = 1, Date = new DateTime(2019, 11, 01, 07, 09, 14), StoreId = 1, UserId = 1},
+        new Order() { OrderId = 2, Date = new DateTime(2019, 11, 17, 07, 09, 14), StoreId = 2, UserId = 2},
+        new Order() { OrderId = 3, Date = new DateTime(2019, 12, 05, 07, 09, 14), StoreId = 1, UserId = 2},
+        new Order() { OrderId = 4, Date = new DateTime(2019, 12, 06, 23, 00, 00), StoreId = 1, UserId = 7},
+        new Order() { OrderId = 5, Date = new DateTime(2019, 12, 31, 15, 09, 00), StoreId = 2, UserId = 2},
+        new Order() { OrderId = 6, Date = new DateTime(2020, 01, 10, 15, 00, 00), StoreId = 6, UserId = 9},
+        new Order() { OrderId = 7, Date = new DateTime(2020, 02, 24, 12, 30, 00), StoreId = 5, UserId = 10},
+        new Order() { OrderId = 8, Date = new DateTime(2020, 03, 01, 14, 25, 00), StoreId = 4, UserId = 1},
+        new Order() { OrderId = 9, Date = new DateTime(2020, 03, 08, 21, 00, 00), StoreId = 3, UserId = 8}
       });
       
       
@@ -115,7 +115,8 @@ namespace PizzaBox.Storing.Databases
         new Pizza() { PizzaId = 6, Name = "LARGE EXQUISITE PIZZA", Description = "flatbread, tomato sauce, vegan cheese, tomatos, avocado, tofu, onions", Price = 15.50M, NumMenu = 6},
         new Pizza() { PizzaId = 7, Name = "SMALL DELICIOUS PIZZA", Description = "thick crust, pesto sauce, vegan cheese, onions, red pepper, mushrooms", Price = 5.50M, NumMenu = 7},
         new Pizza() { PizzaId = 8, Name = "MEDIUM DELICIOUS PIZZA", Description = "thick crust, pesto sauce, vegan cheese, onions, red pepper, mushrooms", Price = 10.50M, NumMenu = 8},
-        new Pizza() { PizzaId = 9, Name = "LARGE DELICIOUS PIZZA", Description = "thick crust, pesto sauce, vegan cheese, onions, red pepper, mushrooms", Price = 16.50M, NumMenu = 9}
+        new Pizza() { PizzaId = 9, Name = "LARGE DELICIOUS PIZZA", Description = "thick crust, pesto sauce, vegan cheese, onions, red pepper, mushrooms", Price = 16.50M, NumMenu = 9},
+        new Pizza() { PizzaId = 10, Name = "GIANT SUPER PIZZA", Description = "thick crust, tomato sauce, tomate, pineapple, avocado", Price = 59.90M, NumMenu = 10}
       });
     }
   }
