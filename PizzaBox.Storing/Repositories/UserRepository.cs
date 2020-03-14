@@ -28,6 +28,18 @@ namespace PizzaBox.Storing.Repositories
       }
     }
 
+    public bool CheckIfUsernameExists(string name)
+    {
+      if (_db.User.SingleOrDefault(s => s.Name == name) != null)
+      {
+        return true;
+      }
+      else
+      {
+        return false;
+      }
+    }
+
     public long GetId(string name, string password)
     {
       long id = (_db.User.SingleOrDefault(u => u.Name == name && u.Password == password).UserId);
@@ -45,6 +57,12 @@ namespace PizzaBox.Storing.Repositories
       string userName = (_db.User.SingleOrDefault(u => u.UserId == userId).Name);
       
       return userName;
+    }
+
+    public bool Post(User user)
+    {
+      _db.User.Add(user);
+      return _db.SaveChanges() == 1;
     }
 
 

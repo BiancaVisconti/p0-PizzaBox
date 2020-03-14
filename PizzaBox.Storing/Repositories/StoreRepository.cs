@@ -30,6 +30,18 @@ namespace PizzaBox.Storing.Repositories
       }
     }
 
+    public bool CheckIfUsernameExists(string name)
+    {
+      if (_db.Store.SingleOrDefault(s => s.Name == name) != null)
+      {
+        return true;
+      }
+      else
+      {
+        return false;
+      }
+    }
+
     public long GetId(int numMenu)
     {
       long id = (_db.Store.SingleOrDefault(s => s.NumMenu == numMenu).StoreId);
@@ -59,6 +71,12 @@ namespace PizzaBox.Storing.Repositories
       string storeName = (_db.Store.SingleOrDefault(s => s.StoreId == storeId).Name);
       
       return storeName;
+    }
+
+    public bool Post(Store store)
+    {
+      _db.Store.Add(store);
+      return _db.SaveChanges() == 1;
     }
  
   }

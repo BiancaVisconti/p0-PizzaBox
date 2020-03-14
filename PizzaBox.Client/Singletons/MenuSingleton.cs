@@ -15,6 +15,8 @@ namespace PizzaBox.Client.Singletons
     private static readonly OrderRepository _or = new OrderRepository();
     private static readonly OrderPizzaRepository _opr = new OrderPizzaRepository();
     private static readonly OrderSingleton _os = OrderSingleton.Instance;
+    private static readonly UserSingleton _us = UserSingleton.Instance;
+    private static readonly StoreSingleton _ss = StoreSingleton.Instance;
     private static readonly OrderPizzaSingleton _ops = OrderPizzaSingleton.Instance;
     private static readonly MenuSingleton _ms = new MenuSingleton();
     
@@ -29,7 +31,22 @@ namespace PizzaBox.Client.Singletons
      public void DoAll()
 
         {
-          string clientOrStore = ClientOrStore();
+          string loginOrAccount = LoginOrCreateAccount();
+
+          if (loginOrAccount == "2")
+          {
+            string clientOrStore_ = CreateClientOrStore();
+            if(clientOrStore_ == "1")
+            {
+              CreateClientAccount();
+            }
+            else
+            {
+              CreatePizzeriaAccount();
+            }
+          }
+
+          string clientOrStore = LoginClientOrStore();
 
           if (clientOrStore == "1")
           {
@@ -157,32 +174,73 @@ namespace PizzaBox.Client.Singletons
               }
             }
           }
-            
+          else if (clientOrStore == "3")
+          {
+
+          }
         }
 
 //========================================================================= LOGIN        
-        public static string ClientOrStore()
+        
+        public static string LoginOrCreateAccount()
         {
           Console.WriteLine("");
           Console.WriteLine("WELCOME TO ARLINGTON'S FASTEST PIZZA DELIVERY APP!");
           Console.WriteLine("");
-          Console.WriteLine("Press 1: LOG AS CLIENT");
-          Console.WriteLine("Press 2: LOG AS PIZZERIA");
+          Console.WriteLine("1) LOG IN");
+          Console.WriteLine("2) CREATE AN ACCOUNT");
+          Console.WriteLine("");
+          Console.Write("Enter your option's number: ");
+          string option = Console.ReadLine();
+          Console.WriteLine("");
+          bool check = option == "1" || option == "2";
+          while (!check)
+            {
+              Console.Write("Invalid input, please try again: ");
+              option = Console.ReadLine();
+              Console.WriteLine("");
+              check = (option == "1" || option == "2");
+            }
+          return option;
+        }
+        
+        public static string LoginClientOrStore()
+        {
+          Console.WriteLine("1) LOG AS CLIENT");
+          Console.WriteLine("2) LOG AS PIZZERIA");
+          Console.WriteLine("3) EXIT");
           Console.WriteLine("");
           Console.Write("Enter your option's number: ");
           string who = Console.ReadLine();
           Console.WriteLine("");
-          bool check = who == "1" || who == "2";
-
+          bool check = who == "1" || who == "2" || who == "3";
           while (!check)
             {
               Console.Write("Invalid input, please try again: ");
               who = Console.ReadLine();
               Console.WriteLine("");
-              check = (who == "1" || who == "2");
+              check = (who == "1" || who == "2" || who == "3");
             }
-          
           return who;
+        }
+
+        public static string CreateClientOrStore()
+        {
+          Console.WriteLine("1) CREATE CLIENT ACCOUNT");
+          Console.WriteLine("2) CREATE PIZZERIA ACCOUNT");
+          Console.WriteLine("");
+          Console.Write("Enter your option's number: ");
+          string option = Console.ReadLine();
+          Console.WriteLine("");
+          bool check = option == "1" || option == "2";
+          while (!check)
+            {
+              Console.Write("Invalid input, please try again: ");
+              option = Console.ReadLine();
+              Console.WriteLine("");
+              check = (option == "1" || option == "2");
+            }
+          return option;
         }
         
         public static User LoginUser()
@@ -200,12 +258,12 @@ namespace PizzaBox.Client.Singletons
           {
             Console.WriteLine("Invalid input, please try again");
             Console.WriteLine("");
-            Console.WriteLine("--------------------------");
+            Console.WriteLine("--------------------------------");
             Console.Write("PLEASE ENTER YOUR USERNAME AGAIN: ");
             client = Console.ReadLine();
             Console.Write("PLEASE ENTER YOUR PASSWORD AGAIN: ");
             cli_password = Console.ReadLine();
-            Console.WriteLine("--------------------------");
+            Console.WriteLine("--------------------------------");
             Console.WriteLine("");
             check2 = _ur.CheckIfAccountExists(client, cli_password);
           }
@@ -230,12 +288,12 @@ namespace PizzaBox.Client.Singletons
           {
             Console.WriteLine("Invalid input, please try again");
             Console.WriteLine("");
-            Console.WriteLine("--------------------------");
+            Console.WriteLine("--------------------------------");
             Console.Write("PLEASE ENTER YOUR USERNAME AGAIN: ");
             store = Console.ReadLine();
             Console.Write("PLEASE ENTER YOUR PASSWORD AGAIN: ");
             store_password = Console.ReadLine();
-            Console.WriteLine("--------------------------");
+            Console.WriteLine("--------------------------------");
             Console.WriteLine("");
             check2 = _sr.CheckIfAccountExists(store, store_password);
           }
@@ -246,6 +304,44 @@ namespace PizzaBox.Client.Singletons
         }
         
 //========================================================================= STORES
+        
+        public static void CreatePizzeriaAccount()
+        {
+          Console.WriteLine("----------------------------------");
+          Console.Write("PLEASE ENTER YOUR DESIRED USERNAME: ");
+          string username = Console.ReadLine();
+          bool check = _sr.CheckIfUsernameExists(username);
+          while (check)
+          {
+            Console.Write("THIS USERNAME IS ALREADY IN USE, PLEASE ENTER A NEW ONE: ");
+            username = Console.ReadLine();
+            check = _sr.CheckIfUsernameExists(username);
+          }
+          Console.Write("PLEASE ENTER YOUR PASSWORD: ");
+          string password = Console.ReadLine();
+          Console.Write("PLEASE CONFIRM YOUR PASSWORD: ");
+          string password_ = Console.ReadLine();
+          bool check2 = password == password_;
+          while (!check2)
+          {
+            Console.WriteLine("");
+            Console.WriteLine("SOMETHING IS NOT RIGHT WITH THE PASSWORD");
+            Console.Write("PLEASE ENTER YOUR PASSWORD AGAIN: ");
+            password = Console.ReadLine();
+            Console.Write("AND CONFIRM AGAIN: ");
+            password_ = Console.ReadLine();
+            check2 = password == password_;
+          }
+          Console.Write("PLEASE ENTER YOUR ADDRESS: ");
+          string address = Console.ReadLine();
+          Console.WriteLine("----------------------------------");
+          Console.WriteLine("");
+          PostStore(username, password, address);
+          Console.WriteLine($"{username}, your account is all set up!");
+          Console.WriteLine("");
+          Console.WriteLine("========================================================================");
+          Console.WriteLine("");
+        }
         public static string MenuForStore()
         {
           Console.WriteLine("========================================================================");
@@ -257,7 +353,6 @@ namespace PizzaBox.Client.Singletons
           Console.WriteLine("2) SALES AND REVENUE");
           Console.WriteLine("3) LOG OUT");
           Console.WriteLine("");
-
           Console.Write("Enter your option's number: ");
           string selection = Console.ReadLine();
           Console.WriteLine("");
@@ -463,6 +558,44 @@ namespace PizzaBox.Client.Singletons
         }
         
 //======================================================================== CLIENTS        
+        
+        public static void CreateClientAccount()
+        {
+          Console.WriteLine("----------------------------------");
+          Console.Write("PLEASE ENTER YOUR DESIRED USERNAME: ");
+          string username = Console.ReadLine();
+          bool check = _ur.CheckIfUsernameExists(username);
+          while (check)
+          {
+            Console.Write("THIS USERNAME IS ALREADY IN USE, PLEASE ENTER A NEW ONE: ");
+            username = Console.ReadLine();
+            check = _ur.CheckIfUsernameExists(username);
+          }
+          Console.Write("PLEASE ENTER YOUR PASSWORD: ");
+          string password = Console.ReadLine();
+          Console.Write("PLEASE CONFIRM YOUR PASSWORD: ");
+          string password_ = Console.ReadLine();
+          bool check2 = password == password_;
+          while (!check2)
+          {
+            Console.WriteLine("");
+            Console.WriteLine("SOMETHING IS NOT RIGHT WITH THE PASSWORD");
+            Console.Write("PLEASE ENTER YOUR PASSWORD AGAIN: ");
+            password = Console.ReadLine();
+            Console.Write("AND CONFIRM AGAIN: ");
+            password_ = Console.ReadLine();
+            check2 = password == password_;
+          }
+          Console.Write("PLEASE ENTER YOUR ADDRESS: ");
+          string address = Console.ReadLine();
+          Console.WriteLine("----------------------------------");
+          Console.WriteLine("");
+          PostUser(username, password, address);
+          Console.WriteLine($"{username}, your account is all set up!");
+          Console.WriteLine("");
+          Console.WriteLine("========================================================================");
+          Console.WriteLine("");
+        }
         public static void ClientViewCompletedOrders(User user)
         {
           Console.WriteLine("================================");
@@ -562,7 +695,7 @@ namespace PizzaBox.Client.Singletons
           ShowStores();
           Console.WriteLine("");
 
-          Console.Write("Enter the store's number: ");
+          Console.Write("Enter the pizzeria's number: ");
           string selection_store = Console.ReadLine();
           Console.WriteLine("");
           bool check3 = CheckIfNumLocationIsValid(selection_store);
@@ -591,7 +724,6 @@ namespace PizzaBox.Client.Singletons
           Console.WriteLine("2) MAKE AN ORDER");
           Console.WriteLine("3) LOG OUT");
           Console.WriteLine("");
-
           Console.Write("Enter your option's number: ");
           string selection = Console.ReadLine();
           Console.WriteLine("");
@@ -618,7 +750,6 @@ namespace PizzaBox.Client.Singletons
           Console.WriteLine("2) LAST 7 DAYS");
           Console.WriteLine("3) LAST 30 DAYS");
           Console.WriteLine("");
-
           Console.Write("Enter your option's number: ");
           string selection = Console.ReadLine();
           Console.WriteLine("");
@@ -659,6 +790,7 @@ namespace PizzaBox.Client.Singletons
           decimal tempPrice;
           int tempAmount = 0;
           bool check = true;
+
           
           while (check)
           {
@@ -835,7 +967,6 @@ namespace PizzaBox.Client.Singletons
           {
             Console.Write("The option you selected is not valid, please try again: ");
             selection_pizza = Console.ReadLine();
-            //int selection_pizz = Int32.Parse(selection_pizza);
             Console.WriteLine("");            
             check = CheckIfNumMenuPizzaIsValid(selection_pizza);
           }
@@ -892,6 +1023,18 @@ namespace PizzaBox.Client.Singletons
         {
           _ops.Post(order, pizza, amount);
         }
+
+        public static void PostUser(string name, string password, string address)
+        {
+          _us.Post(name, password, address);
+        }
+        
+
+        public static void PostStore(string name, string password, string address)
+        {
+          _ss.Post(name, password, address);
+        }
+        
 
         public static Dictionary<Pizza, int> PizzaAmount(List<Pizza> list)
         {
