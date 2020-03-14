@@ -80,7 +80,7 @@ namespace PizzaBox.Client.Singletons
                   }
                   else
                   {
-                    Console.WriteLine("===================================================================");
+                    Console.WriteLine("========================================================================");
                     Console.WriteLine("");
                     Console.WriteLine("YOU MADE AN ORDER WITHIN THE LAST 24 HOURS IN ANOTHER STORE");
                     Console.WriteLine("");
@@ -90,7 +90,7 @@ namespace PizzaBox.Client.Singletons
                 }
                 else
                 {
-                  Console.WriteLine("===================================================================");
+                  Console.WriteLine("========================================================================");
                   Console.WriteLine("");
                   Console.WriteLine("YOU MADE AN ORDER WITHIN THE LAST 2 HOURS, YOU CANNOT ORDER NOW");
                   Console.WriteLine("");
@@ -248,7 +248,7 @@ namespace PizzaBox.Client.Singletons
 //========================================================================= STORES
         public static string MenuForStore()
         {
-          Console.WriteLine("===================================================================");
+          Console.WriteLine("========================================================================");
           Console.WriteLine("");
           Console.Write("Choose one of the following options");
           Console.WriteLine("");
@@ -582,7 +582,7 @@ namespace PizzaBox.Client.Singletons
         
         public static string MenuforClient()
         {
-          Console.WriteLine("===================================================================");
+          Console.WriteLine("========================================================================");
           Console.WriteLine("");
           Console.Write("Choose one of the following options");
           Console.WriteLine("");
@@ -655,33 +655,41 @@ namespace PizzaBox.Client.Singletons
         {
           List<Pizza> list = new List<Pizza>();
           decimal maxTotal = 250M;                 // *** MAXTOTAL = 250
-          int maxTotalAmount = 50;                // *** MAXTOTALAMOUNT = 50 
+          int maxTotalAmount = 10;                // *** MAXTOTALAMOUNT = 50 
+          decimal tempPrice;
+          int tempAmount = 0;
           bool check = true;
           
           while (check)
           {
-            ShowMenu();
-            Console.WriteLine("");
-            int selection_pizza = SelectPizza();
-            
-
-            Pizza pizza = _pr.GetPizzaByNumMenu(selection_pizza);
-            decimal tempPrice = list.Sum(l => l.Price);
-            int tempAmount = list.Count();
-            if (tempPrice + pizza.Price > maxTotal)
+            if(tempAmount == maxTotalAmount)
             {
-              Console.WriteLine($"You can't add this pizza, the total would go over ${maxTotal}");
+              Console.WriteLine($"You can't add more pizzas, you have reached the maximum n° of pizzas for an order, which is {maxTotalAmount}");
               Console.WriteLine("");
             }
             else
             {
-              list.Add(pizza);
-              tempAmount = list.Count();
+              ShowMenu();
+              Console.WriteLine("");
+              int selection_pizza = SelectPizza();
               
-              PrintPartialOrder(list);
+              Pizza pizza = _pr.GetPizzaByNumMenu(selection_pizza); 
+              tempPrice = list.Sum(l => l.Price);
+              tempAmount = list.Count();
+              if (tempPrice + pizza.Price > maxTotal)
+              {
+                Console.WriteLine($"You can't add this pizza, the total would go over ${maxTotal}");
+                Console.WriteLine("");
+              }
+              else if (tempAmount < maxTotalAmount && (tempPrice + pizza.Price) <= maxTotal)
+              {
+                list.Add(pizza);
+                tempAmount = list.Count();
+                
+                PrintPartialOrder(list);
+              }
             }
-
-            if (tempAmount < maxTotalAmount)
+            if (tempAmount <= maxTotalAmount)
             {
               menuPizza:
               Console.WriteLine("-----------------------------");
@@ -708,6 +716,7 @@ namespace PizzaBox.Client.Singletons
               else if (addPizza == "2")
               {
                 list = RemovePizza(list);
+                tempAmount = list.Count();
                 PrintPartialOrder(list);
                 goto menuPizza;
               }
@@ -717,12 +726,6 @@ namespace PizzaBox.Client.Singletons
                 check = false;
               }
             }
-            else //tempAmount == maxTotalAmount
-            {
-              Console.WriteLine($"You have reached the maximum amount of pizzas for an order, which is {maxTotalAmount}");
-              CheckOut(list, user);
-              check = false;
-            } 
           }
           return list;
         }
@@ -771,7 +774,7 @@ namespace PizzaBox.Client.Singletons
           foreach (var o in list)
           {
             
-            DateTime date = new DateTime(2020, 03, 07, 04, 00, 00);
+            DateTime date = DateTime.Now;
             double minutes = date.Subtract(o.Date).TotalMinutes;
 
             if (minutes < 2*60)
