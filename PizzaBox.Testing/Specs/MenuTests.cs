@@ -44,21 +44,23 @@ namespace PizzaBox.Testing.Specs
       Assert.True(actual.Count >= 0);
     }
 
-    [Fact]
+    /*[Fact]
     public void Test_PreOrder()
     {
       var actual = MenuSingleton.PreOrder(u);
 
       Assert.True(actual.Count >= 0);
     }
+    */
 
-    [Fact]
+    /*[Fact]
     public void Test_RemovePizza()
     {
       var actual = MenuSingleton.RemovePizza(lp);
 
       Assert.True(actual.Count >= 0);
     }
+    */
 
     [Fact]
     public void Test_PizzaAmount()

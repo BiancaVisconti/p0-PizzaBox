@@ -12,6 +12,7 @@ namespace PizzaBox.Storing.Databases
     public DbSet<Store> Store { get; set; }
     public DbSet<Order> Order { get; set; }
     public DbSet<OrderPizza> OrderPizza { get; set; }
+    public DbSet<StorePizza> StorePizza { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder builder)
     {
@@ -42,9 +43,11 @@ namespace PizzaBox.Storing.Databases
 
       builder.Entity<Store>().HasKey(s => s.StoreId);
 
-      builder.Entity<Store>().HasMany(u => u.Orders).WithOne(o => o.Store);
+      builder.Entity<Store>().HasMany(s => s.Orders).WithOne(o => o.Store);
 
-      builder.Entity<Store>().Property(u => u.StoreId).ValueGeneratedNever();
+      builder.Entity<Store>().HasMany(s => s.StorePizzas).WithOne(sp => sp.Store);
+
+      builder.Entity<Store>().Property(s => s.StoreId).ValueGeneratedNever();
 
       builder.Entity<Store>().HasData(new Store[]
       {
@@ -102,6 +105,8 @@ namespace PizzaBox.Storing.Databases
       builder.Entity<Pizza>().HasKey(p => p.PizzaId);
 
       builder.Entity<Pizza>().HasMany(p => p.OrderPizzas).WithOne(op => op.Pizza);
+
+      builder.Entity<Pizza>().HasMany(p => p.StorePizzas).WithOne(sp => sp.Pizza);
       
       builder.Entity<Pizza>().Property(p => p.PizzaId).ValueGeneratedNever();
       
@@ -117,6 +122,75 @@ namespace PizzaBox.Storing.Databases
         new Pizza() { PizzaId = 8, Name = "MEDIUM DELICIOUS PIZZA", Description = "thick crust, pesto sauce, vegan cheese, onions, red pepper, mushrooms", Price = 10.50M, NumMenu = 8},
         new Pizza() { PizzaId = 9, Name = "LARGE DELICIOUS PIZZA", Description = "thick crust, pesto sauce, vegan cheese, onions, red pepper, mushrooms", Price = 16.50M, NumMenu = 9},
         new Pizza() { PizzaId = 10, Name = "GIANT SUPER PIZZA", Description = "thick crust, tomato sauce, tomate, pineapple, avocado", Price = 59.90M, NumMenu = 10}
+      });
+
+
+      builder.Entity<StorePizza>().HasKey(sp => sp.StorePizzaId);
+
+      builder.Entity<StorePizza>().Property(sp => sp.StorePizzaId).ValueGeneratedNever();
+
+      builder.Entity<StorePizza>().HasData(new StorePizza[]
+      {
+        new StorePizza() { StorePizzaId = 1, StoreId = 1, PizzaId = 1, Inventory = 2},
+        new StorePizza() { StorePizzaId = 2, StoreId = 1, PizzaId = 2, Inventory = 2},
+        new StorePizza() { StorePizzaId = 3, StoreId = 1, PizzaId = 3, Inventory = 2},
+        new StorePizza() { StorePizzaId = 4, StoreId = 1, PizzaId = 4, Inventory = 2},
+        new StorePizza() { StorePizzaId = 5, StoreId = 1, PizzaId = 5, Inventory = 2},
+        new StorePizza() { StorePizzaId = 6, StoreId = 1, PizzaId = 6, Inventory = 2},
+        new StorePizza() { StorePizzaId = 7, StoreId = 1, PizzaId = 7, Inventory = 2},
+        new StorePizza() { StorePizzaId = 8, StoreId = 1, PizzaId = 8, Inventory = 2},
+        new StorePizza() { StorePizzaId = 9, StoreId = 1, PizzaId = 9, Inventory = 2},
+        new StorePizza() { StorePizzaId = 10, StoreId = 1, PizzaId = 10, Inventory = 2},
+        new StorePizza() { StorePizzaId = 11, StoreId = 2, PizzaId = 1, Inventory = 2},
+        new StorePizza() { StorePizzaId = 12, StoreId = 2, PizzaId = 2, Inventory = 2},
+        new StorePizza() { StorePizzaId = 13, StoreId = 2, PizzaId = 3, Inventory = 2},
+        new StorePizza() { StorePizzaId = 14, StoreId = 2, PizzaId = 4, Inventory = 2},
+        new StorePizza() { StorePizzaId = 15, StoreId = 2, PizzaId = 5, Inventory = 2},
+        new StorePizza() { StorePizzaId = 16, StoreId = 2, PizzaId = 6, Inventory = 2},
+        new StorePizza() { StorePizzaId = 17, StoreId = 2, PizzaId = 7, Inventory = 2},
+        new StorePizza() { StorePizzaId = 18, StoreId = 2, PizzaId = 8, Inventory = 2},
+        new StorePizza() { StorePizzaId = 19, StoreId = 2, PizzaId = 9, Inventory = 2},
+        new StorePizza() { StorePizzaId = 20, StoreId = 2, PizzaId = 10, Inventory = 2},
+        new StorePizza() { StorePizzaId = 21, StoreId = 3, PizzaId = 1, Inventory = 2},
+        new StorePizza() { StorePizzaId = 22, StoreId = 3, PizzaId = 2, Inventory = 2},
+        new StorePizza() { StorePizzaId = 23, StoreId = 3, PizzaId = 3, Inventory = 2},
+        new StorePizza() { StorePizzaId = 24, StoreId = 3, PizzaId = 4, Inventory = 2},
+        new StorePizza() { StorePizzaId = 25, StoreId = 3, PizzaId = 5, Inventory = 2},
+        new StorePizza() { StorePizzaId = 26, StoreId = 3, PizzaId = 6, Inventory = 2},
+        new StorePizza() { StorePizzaId = 27, StoreId = 3, PizzaId = 7, Inventory = 2},
+        new StorePizza() { StorePizzaId = 28, StoreId = 3, PizzaId = 8, Inventory = 2},
+        new StorePizza() { StorePizzaId = 29, StoreId = 3, PizzaId = 9, Inventory = 2},
+        new StorePizza() { StorePizzaId = 30, StoreId = 3, PizzaId = 10, Inventory = 2},
+        new StorePizza() { StorePizzaId = 31, StoreId = 4, PizzaId = 1, Inventory = 2},
+        new StorePizza() { StorePizzaId = 32, StoreId = 4, PizzaId = 2, Inventory = 2},
+        new StorePizza() { StorePizzaId = 33, StoreId = 4, PizzaId = 3, Inventory = 2},
+        new StorePizza() { StorePizzaId = 34, StoreId = 4, PizzaId = 4, Inventory = 2},
+        new StorePizza() { StorePizzaId = 35, StoreId = 4, PizzaId = 5, Inventory = 2},
+        new StorePizza() { StorePizzaId = 36, StoreId = 4, PizzaId = 6, Inventory = 2},
+        new StorePizza() { StorePizzaId = 37, StoreId = 4, PizzaId = 7, Inventory = 2},
+        new StorePizza() { StorePizzaId = 38, StoreId = 4, PizzaId = 8, Inventory = 2},
+        new StorePizza() { StorePizzaId = 39, StoreId = 4, PizzaId = 9, Inventory = 2},
+        new StorePizza() { StorePizzaId = 40, StoreId = 4, PizzaId = 10, Inventory = 2},
+        new StorePizza() { StorePizzaId = 41, StoreId = 5, PizzaId = 1, Inventory = 2},
+        new StorePizza() { StorePizzaId = 42, StoreId = 5, PizzaId = 2, Inventory = 2},
+        new StorePizza() { StorePizzaId = 43, StoreId = 5, PizzaId = 3, Inventory = 2},
+        new StorePizza() { StorePizzaId = 44, StoreId = 5, PizzaId = 4, Inventory = 2},
+        new StorePizza() { StorePizzaId = 45, StoreId = 5, PizzaId = 5, Inventory = 2},
+        new StorePizza() { StorePizzaId = 46, StoreId = 5, PizzaId = 6, Inventory = 2},
+        new StorePizza() { StorePizzaId = 47, StoreId = 5, PizzaId = 7, Inventory = 2},
+        new StorePizza() { StorePizzaId = 48, StoreId = 5, PizzaId = 8, Inventory = 2},
+        new StorePizza() { StorePizzaId = 49, StoreId = 5, PizzaId = 9, Inventory = 2},
+        new StorePizza() { StorePizzaId = 50, StoreId = 5, PizzaId = 10, Inventory = 2},
+        new StorePizza() { StorePizzaId = 51, StoreId = 6, PizzaId = 1, Inventory = 2},
+        new StorePizza() { StorePizzaId = 52, StoreId = 6, PizzaId = 2, Inventory = 2},
+        new StorePizza() { StorePizzaId = 53, StoreId = 6, PizzaId = 3, Inventory = 2},
+        new StorePizza() { StorePizzaId = 54, StoreId = 6, PizzaId = 4, Inventory = 2},
+        new StorePizza() { StorePizzaId = 55, StoreId = 6, PizzaId = 5, Inventory = 2},
+        new StorePizza() { StorePizzaId = 56, StoreId = 6, PizzaId = 6, Inventory = 2},
+        new StorePizza() { StorePizzaId = 57, StoreId = 6, PizzaId = 7, Inventory = 2},
+        new StorePizza() { StorePizzaId = 58, StoreId = 6, PizzaId = 8, Inventory = 2},
+        new StorePizza() { StorePizzaId = 59, StoreId = 6, PizzaId = 9, Inventory = 2},
+        new StorePizza() { StorePizzaId = 60, StoreId = 6, PizzaId = 10, Inventory = 2}
       });
     }
   }

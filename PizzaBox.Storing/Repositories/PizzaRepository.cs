@@ -16,6 +16,13 @@ namespace PizzaBox.Storing.Repositories
     {
 			return _db.Pizza.ToList();
     }
+
+    public Pizza GetPizza(long pizzaId)
+    {
+      Pizza pizza = _db.Pizza.SingleOrDefault(p => p.PizzaId == pizzaId);
+      
+      return pizza;
+    }
  
     public string GetName(long pizzaId)
     {
@@ -35,7 +42,5 @@ namespace PizzaBox.Storing.Repositories
     {
       return _db.Pizza.SingleOrDefault(p => p.NumMenu == id);
     }
-
-    
   }
 }

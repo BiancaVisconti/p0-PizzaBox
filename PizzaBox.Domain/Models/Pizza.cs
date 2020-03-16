@@ -17,6 +17,7 @@ namespace PizzaBox.Domain.Models
     #region NAVIGATIONAL PROPERTIES
 
     public List<OrderPizza> OrderPizzas { get; set; }
+    public List<StorePizza> StorePizzas { get; set; }
 
     #endregion
     public Pizza()

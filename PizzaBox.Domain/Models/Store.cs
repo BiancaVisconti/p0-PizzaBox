@@ -12,6 +12,11 @@ namespace PizzaBox.Domain.Models
 
     public List<Order> Orders { get; set; }
 
+    #region NAVIGATIONAL PROPERTIES
+    public List<StorePizza> StorePizzas { get; set; }
+
+    #endregion
+
     public Store()
     {
       StoreId = DateTime.Now.Ticks;

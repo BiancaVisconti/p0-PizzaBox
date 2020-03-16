@@ -10,8 +10,8 @@ using PizzaBox.Storing.Databases;
 namespace PizzaBox.Storing.Migrations
 {
     [DbContext(typeof(PizzaBoxDbContext))]
-    [Migration("20200308011845_migration9")]
-    partial class migration9
+    [Migration("20200316033100_migration2")]
+    partial class migration2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -103,7 +103,7 @@ namespace PizzaBox.Storing.Migrations
                         new
                         {
                             OrderId = 9L,
-                            Date = new DateTime(2020, 3, 8, 21, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2020, 3, 10, 16, 0, 0, 0, DateTimeKind.Unspecified),
                             StoreId = 3L,
                             UserId = 8L
                         });
@@ -408,6 +408,451 @@ namespace PizzaBox.Storing.Migrations
                         });
                 });
 
+            modelBuilder.Entity("PizzaBox.Domain.Models.StorePizza", b =>
+                {
+                    b.Property<long>("StorePizzaId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Inventory")
+                        .HasColumnType("int");
+
+                    b.Property<long>("PizzaId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("StoreId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("StorePizzaId");
+
+                    b.HasIndex("PizzaId");
+
+                    b.HasIndex("StoreId");
+
+                    b.ToTable("StorePizza");
+
+                    b.HasData(
+                        new
+                        {
+                            StorePizzaId = 1L,
+                            Inventory = 2,
+                            PizzaId = 1L,
+                            StoreId = 1L
+                        },
+                        new
+                        {
+                            StorePizzaId = 2L,
+                            Inventory = 2,
+                            PizzaId = 2L,
+                            StoreId = 1L
+                        },
+                        new
+                        {
+                            StorePizzaId = 3L,
+                            Inventory = 2,
+                            PizzaId = 3L,
+                            StoreId = 1L
+                        },
+                        new
+                        {
+                            StorePizzaId = 4L,
+                            Inventory = 2,
+                            PizzaId = 4L,
+                            StoreId = 1L
+                        },
+                        new
+                        {
+                            StorePizzaId = 5L,
+                            Inventory = 2,
+                            PizzaId = 5L,
+                            StoreId = 1L
+                        },
+                        new
+                        {
+                            StorePizzaId = 6L,
+                            Inventory = 2,
+                            PizzaId = 6L,
+                            StoreId = 1L
+                        },
+                        new
+                        {
+                            StorePizzaId = 7L,
+                            Inventory = 2,
+                            PizzaId = 7L,
+                            StoreId = 1L
+                        },
+                        new
+                        {
+                            StorePizzaId = 8L,
+                            Inventory = 2,
+                            PizzaId = 8L,
+                            StoreId = 1L
+                        },
+                        new
+                        {
+                            StorePizzaId = 9L,
+                            Inventory = 2,
+                            PizzaId = 9L,
+                            StoreId = 1L
+                        },
+                        new
+                        {
+                            StorePizzaId = 10L,
+                            Inventory = 2,
+                            PizzaId = 10L,
+                            StoreId = 1L
+                        },
+                        new
+                        {
+                            StorePizzaId = 11L,
+                            Inventory = 2,
+                            PizzaId = 1L,
+                            StoreId = 2L
+                        },
+                        new
+                        {
+                            StorePizzaId = 12L,
+                            Inventory = 2,
+                            PizzaId = 2L,
+                            StoreId = 2L
+                        },
+                        new
+                        {
+                            StorePizzaId = 13L,
+                            Inventory = 2,
+                            PizzaId = 3L,
+                            StoreId = 2L
+                        },
+                        new
+                        {
+                            StorePizzaId = 14L,
+                            Inventory = 2,
+                            PizzaId = 4L,
+                            StoreId = 2L
+                        },
+                        new
+                        {
+                            StorePizzaId = 15L,
+                            Inventory = 2,
+                            PizzaId = 5L,
+                            StoreId = 2L
+                        },
+                        new
+                        {
+                            StorePizzaId = 16L,
+                            Inventory = 2,
+                            PizzaId = 6L,
+                            StoreId = 2L
+                        },
+                        new
+                        {
+                            StorePizzaId = 17L,
+                            Inventory = 2,
+                            PizzaId = 7L,
+                            StoreId = 2L
+                        },
+                        new
+                        {
+                            StorePizzaId = 18L,
+                            Inventory = 2,
+                            PizzaId = 8L,
+                            StoreId = 2L
+                        },
+                        new
+                        {
+                            StorePizzaId = 19L,
+                            Inventory = 2,
+                            PizzaId = 9L,
+                            StoreId = 2L
+                        },
+                        new
+                        {
+                            StorePizzaId = 20L,
+                            Inventory = 2,
+                            PizzaId = 10L,
+                            StoreId = 2L
+                        },
+                        new
+                        {
+                            StorePizzaId = 21L,
+                            Inventory = 2,
+                            PizzaId = 1L,
+                            StoreId = 3L
+                        },
+                        new
+                        {
+                            StorePizzaId = 22L,
+                            Inventory = 2,
+                            PizzaId = 2L,
+                            StoreId = 3L
+                        },
+                        new
+                        {
+                            StorePizzaId = 23L,
+                            Inventory = 2,
+                            PizzaId = 3L,
+                            StoreId = 3L
+                        },
+                        new
+                        {
+                            StorePizzaId = 24L,
+                            Inventory = 2,
+                            PizzaId = 4L,
+                            StoreId = 3L
+                        },
+                        new
+                        {
+                            StorePizzaId = 25L,
+                            Inventory = 2,
+                            PizzaId = 5L,
+                            StoreId = 3L
+                        },
+                        new
+                        {
+                            StorePizzaId = 26L,
+                            Inventory = 2,
+                            PizzaId = 6L,
+                            StoreId = 3L
+                        },
+                        new
+                        {
+                            StorePizzaId = 27L,
+                            Inventory = 2,
+                            PizzaId = 7L,
+                            StoreId = 3L
+                        },
+                        new
+                        {
+                            StorePizzaId = 28L,
+                            Inventory = 2,
+                            PizzaId = 8L,
+                            StoreId = 3L
+                        },
+                        new
+                        {
+                            StorePizzaId = 29L,
+                            Inventory = 2,
+                            PizzaId = 9L,
+                            StoreId = 3L
+                        },
+                        new
+                        {
+                            StorePizzaId = 30L,
+                            Inventory = 2,
+                            PizzaId = 10L,
+                            StoreId = 3L
+                        },
+                        new
+                        {
+                            StorePizzaId = 31L,
+                            Inventory = 2,
+                            PizzaId = 1L,
+                            StoreId = 4L
+                        },
+                        new
+                        {
+                            StorePizzaId = 32L,
+                            Inventory = 2,
+                            PizzaId = 2L,
+                            StoreId = 4L
+                        },
+                        new
+                        {
+                            StorePizzaId = 33L,
+                            Inventory = 2,
+                            PizzaId = 3L,
+                            StoreId = 4L
+                        },
+                        new
+                        {
+                            StorePizzaId = 34L,
+                            Inventory = 2,
+                            PizzaId = 4L,
+                            StoreId = 4L
+                        },
+                        new
+                        {
+                            StorePizzaId = 35L,
+                            Inventory = 2,
+                            PizzaId = 5L,
+                            StoreId = 4L
+                        },
+                        new
+                        {
+                            StorePizzaId = 36L,
+                            Inventory = 2,
+                            PizzaId = 6L,
+                            StoreId = 4L
+                        },
+                        new
+                        {
+                            StorePizzaId = 37L,
+                            Inventory = 2,
+                            PizzaId = 7L,
+                            StoreId = 4L
+                        },
+                        new
+                        {
+                            StorePizzaId = 38L,
+                            Inventory = 2,
+                            PizzaId = 8L,
+                            StoreId = 4L
+                        },
+                        new
+                        {
+                            StorePizzaId = 39L,
+                            Inventory = 2,
+                            PizzaId = 9L,
+                            StoreId = 4L
+                        },
+                        new
+                        {
+                            StorePizzaId = 40L,
+                            Inventory = 2,
+                            PizzaId = 10L,
+                            StoreId = 4L
+                        },
+                        new
+                        {
+                            StorePizzaId = 41L,
+                            Inventory = 2,
+                            PizzaId = 1L,
+                            StoreId = 5L
+                        },
+                        new
+                        {
+                            StorePizzaId = 42L,
+                            Inventory = 2,
+                            PizzaId = 2L,
+                            StoreId = 5L
+                        },
+                        new
+                        {
+                            StorePizzaId = 43L,
+                            Inventory = 2,
+                            PizzaId = 3L,
+                            StoreId = 5L
+                        },
+                        new
+                        {
+                            StorePizzaId = 44L,
+                            Inventory = 2,
+                            PizzaId = 4L,
+                            StoreId = 5L
+                        },
+                        new
+                        {
+                            StorePizzaId = 45L,
+                            Inventory = 2,
+                            PizzaId = 5L,
+                            StoreId = 5L
+                        },
+                        new
+                        {
+                            StorePizzaId = 46L,
+                            Inventory = 2,
+                            PizzaId = 6L,
+                            StoreId = 5L
+                        },
+                        new
+                        {
+                            StorePizzaId = 47L,
+                            Inventory = 2,
+                            PizzaId = 7L,
+                            StoreId = 5L
+                        },
+                        new
+                        {
+                            StorePizzaId = 48L,
+                            Inventory = 2,
+                            PizzaId = 8L,
+                            StoreId = 5L
+                        },
+                        new
+                        {
+                            StorePizzaId = 49L,
+                            Inventory = 2,
+                            PizzaId = 9L,
+                            StoreId = 5L
+                        },
+                        new
+                        {
+                            StorePizzaId = 50L,
+                            Inventory = 2,
+                            PizzaId = 10L,
+                            StoreId = 5L
+                        },
+                        new
+                        {
+                            StorePizzaId = 51L,
+                            Inventory = 2,
+                            PizzaId = 1L,
+                            StoreId = 6L
+                        },
+                        new
+                        {
+                            StorePizzaId = 52L,
+                            Inventory = 2,
+                            PizzaId = 2L,
+                            StoreId = 6L
+                        },
+                        new
+                        {
+                            StorePizzaId = 53L,
+                            Inventory = 2,
+                            PizzaId = 3L,
+                            StoreId = 6L
+                        },
+                        new
+                        {
+                            StorePizzaId = 54L,
+                            Inventory = 2,
+                            PizzaId = 4L,
+                            StoreId = 6L
+                        },
+                        new
+                        {
+                            StorePizzaId = 55L,
+                            Inventory = 2,
+                            PizzaId = 5L,
+                            StoreId = 6L
+                        },
+                        new
+                        {
+                            StorePizzaId = 56L,
+                            Inventory = 2,
+                            PizzaId = 6L,
+                            StoreId = 6L
+                        },
+                        new
+                        {
+                            StorePizzaId = 57L,
+                            Inventory = 2,
+                            PizzaId = 7L,
+                            StoreId = 6L
+                        },
+                        new
+                        {
+                            StorePizzaId = 58L,
+                            Inventory = 2,
+                            PizzaId = 8L,
+                            StoreId = 6L
+                        },
+                        new
+                        {
+                            StorePizzaId = 59L,
+                            Inventory = 2,
+                            PizzaId = 9L,
+                            StoreId = 6L
+                        },
+                        new
+                        {
+                            StorePizzaId = 60L,
+                            Inventory = 2,
+                            PizzaId = 10L,
+                            StoreId = 6L
+                        });
+                });
+
             modelBuilder.Entity("PizzaBox.Domain.Models.User", b =>
                 {
                     b.Property<long>("UserId")
@@ -525,6 +970,21 @@ namespace PizzaBox.Storing.Migrations
                     b.HasOne("PizzaBox.Domain.Models.Pizza", "Pizza")
                         .WithMany("OrderPizzas")
                         .HasForeignKey("PizzaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PizzaBox.Domain.Models.StorePizza", b =>
+                {
+                    b.HasOne("PizzaBox.Domain.Models.Pizza", "Pizza")
+                        .WithMany("StorePizzas")
+                        .HasForeignKey("PizzaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PizzaBox.Domain.Models.Store", "Store")
+                        .WithMany("StorePizzas")
+                        .HasForeignKey("StoreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
