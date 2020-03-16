@@ -173,6 +173,10 @@ namespace PizzaBox.Client.Singletons
               }
               else if (optionStore == "3")
               {
+                StoreViewInventory(store);
+              }
+              else if (optionStore == "4")
+              {
                 Console.WriteLine($"Bye {store.Name}, hope to see you soon!");
                 Console.WriteLine("");
                 finishMenu = true;
@@ -356,19 +360,20 @@ namespace PizzaBox.Client.Singletons
           Console.WriteLine("");
           Console.WriteLine("1) PAST ORDERS");
           Console.WriteLine("2) SALES AND REVENUE");
-          Console.WriteLine("3) LOG OUT");
+          Console.WriteLine("3) INVENTORY");
+          Console.WriteLine("4) LOG OUT");
           Console.WriteLine("");
           Console.Write("Enter your option's number: ");
           string selection = Console.ReadLine();
           Console.WriteLine("");
-          bool check = selection == "1" || selection == "2" || selection == "3";
+          bool check = selection == "1" || selection == "2" || selection == "3" || selection == "4";
               
           while (!check)
           {
             Console.Write("The option you selected is not valid, please try again: ");
             selection = Console.ReadLine();
             Console.WriteLine("");
-            check = selection == "1" || selection == "2" || selection == "3";
+            check = selection == "1" || selection == "2" || selection == "3" || selection == "4";
           }
 
           return selection;
@@ -560,6 +565,24 @@ namespace PizzaBox.Client.Singletons
               Console.WriteLine("");
             }    
           }
+        }
+
+        public static void StoreViewInventory(Store store)
+        {
+          Console.WriteLine("================================");
+          Console.WriteLine("");
+          Console.WriteLine($"INVENTORY");
+          Console.WriteLine("---------");
+          Console.WriteLine("");
+          List<StorePizza> list = _spr.GetPerStore(store);
+          Console.WriteLine($"Stock | N° - Price - Name - Description");
+          Console.WriteLine("------------------------------------------------------------------------------------------------------");
+          foreach (var sp in list)
+          {
+            Pizza pizza = _pr.GetPizza(sp.PizzaId);
+            Console.WriteLine($"{sp.Inventory}     | {pizza}");
+          }
+          Console.WriteLine("");
         }
         
 //======================================================================== CLIENTS        

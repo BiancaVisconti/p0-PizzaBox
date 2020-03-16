@@ -14,6 +14,11 @@ namespace PizzaBox.Storing.Repositories
 			return _db.StorePizza.ToList();
     }
 
+    public List<StorePizza> GetPerStore(Store store) 
+    {
+			return _db.StorePizza.Where(sp => sp.StoreId == store.StoreId).ToList();
+    }
+
     public StorePizza Get(Store store, Pizza pizza)
     {
       StorePizza storePizza = (_db.StorePizza.SingleOrDefault(sp => sp.PizzaId == pizza.PizzaId && sp.StoreId == store.StoreId));
