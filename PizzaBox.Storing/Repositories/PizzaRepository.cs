@@ -40,7 +40,7 @@ namespace PizzaBox.Storing.Repositories
 
     public Pizza GetPizzaByNumMenu(int id)
     {
-      return _db.Pizza.SingleOrDefault(p => p.NumMenu == id);
+      return _db.Pizza.SingleOrDefault(p => p.PizzaId == id);
     }
   }
 }

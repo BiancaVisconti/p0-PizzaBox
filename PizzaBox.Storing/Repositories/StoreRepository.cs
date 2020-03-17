@@ -44,7 +44,7 @@ namespace PizzaBox.Storing.Repositories
 
     public long GetId(int numMenu)
     {
-      long id = (_db.Store.SingleOrDefault(s => s.NumMenu == numMenu).StoreId);
+      long id = (_db.Store.SingleOrDefault(s => s.StoreId == numMenu).StoreId);
       
       return id;
     }
@@ -63,7 +63,7 @@ namespace PizzaBox.Storing.Repositories
 
     public Store GetStore(int numMenu)
     {
-      return _db.Store.SingleOrDefault(s => s.NumMenu == numMenu);
+      return _db.Store.SingleOrDefault(s => s.StoreId == numMenu);
     }
 
     public string GetName(long storeId)

@@ -12,7 +12,7 @@ namespace PizzaBox.Domain.Models
     public string Name { get; set; }
     public string Description { get; set; }
     public decimal Price { get; set; }
-    public int NumMenu { get; set; }
+    //public int NumMenu { get; set; }
 
     #region NAVIGATIONAL PROPERTIES
 
@@ -22,12 +22,12 @@ namespace PizzaBox.Domain.Models
     #endregion
     public Pizza()
     {
-      PizzaId = DateTime.Now.Ticks;
+      //PizzaId = DateTime.Now.Ticks;
     }
 
     public override string ToString()
     {
-      return $"{NumMenu})  ${Price}  {Name}  {Description} ";
+      return $"{PizzaId})  ${Price}  {Name}  {Description} ";
     }
 
     public override long GetId()

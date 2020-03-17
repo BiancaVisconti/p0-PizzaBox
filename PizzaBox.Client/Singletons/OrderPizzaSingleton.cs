@@ -28,6 +28,7 @@ namespace PizzaBox.Client.Singletons
     public bool Post(Order order, Pizza pizza, int amount)
     {
       var op = new OrderPizza();
+      op.OrderPizzaId = _opr.Get().Count() + 1;
       op.OrderId = order.OrderId;
       op.PizzaId = pizza.PizzaId;
       op.Amount = amount;

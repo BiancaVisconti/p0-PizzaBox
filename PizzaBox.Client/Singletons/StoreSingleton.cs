@@ -28,11 +28,12 @@ namespace PizzaBox.Client.Singletons
     public bool Post(string name, string password, string address)
     {
       var s = new Store();
+      s.StoreId = _sr.Get().Count() + 1;
       s.Name = name;
       s.Password = password;
       s.Address = address;
-      int numMenu = _sr.Get().Count;
-      s.NumMenu = numMenu + 1;
+      // int numMenu = _sr.Get().Count;
+      // s.NumMenu = numMenu + 1;
     
       return _sr.Post(s);
     }

@@ -51,12 +51,12 @@ namespace PizzaBox.Storing.Databases
 
       builder.Entity<Store>().HasData(new Store[]
       {
-        new Store() { StoreId = 1, Name = "PizzaEater", Password = "eater", Address = "Cooper 786", NumMenu = 1},
-        new Store() { StoreId = 2, Name = "DiegoPizza", Password = "diego", Address = "Mitchel 83", NumMenu = 2},
-        new Store() { StoreId = 3, Name = "MiPizza", Password = "pizza", Address = "Mesquite 476", NumMenu = 3},
-        new Store() { StoreId = 4, Name = "TuPizza", Password = "pizza", Address = "Abram 34", NumMenu = 4},
-        new Store() { StoreId = 5, Name = "Mangiata", Password = "comer", Address = "Cooper 132", NumMenu = 5},
-        new Store() { StoreId = 6, Name = "PizzaLover", Password = "pizza", Address = "Mesquite 87", NumMenu = 6}
+        new Store() { StoreId = 1, Name = "PizzaEater", Password = "eater", Address = "Cooper 786"},
+        new Store() { StoreId = 2, Name = "DiegoPizza", Password = "diego", Address = "Mitchel 83"},
+        new Store() { StoreId = 3, Name = "MiPizza", Password = "pizza", Address = "Mesquite 476"},
+        new Store() { StoreId = 4, Name = "TuPizza", Password = "pizza", Address = "Abram 34"},
+        new Store() { StoreId = 5, Name = "Mangiata", Password = "comer", Address = "Cooper 132"},
+        new Store() { StoreId = 6, Name = "PizzaLover", Password = "pizza", Address = "Mesquite 87"}
         
       });
 
@@ -112,16 +112,16 @@ namespace PizzaBox.Storing.Databases
       
       builder.Entity<Pizza>().HasData(new Pizza[]
       {
-        new Pizza() { PizzaId = 1, Name = "SMALL HAWAIIAN PIZZA", Description = "thin crust, tomato sauce, vegan cheese, pineapple, green pepper, onions", Price = 5.00M, NumMenu = 1},
-        new Pizza() { PizzaId = 2, Name = "MEDIUM HAWAIIAN PIZZA", Description = "thin crust, tomato sauce, vegan cheese, pineapple, green pepper, onions", Price = 9.50M, NumMenu = 2},
-        new Pizza() { PizzaId = 3, Name = "LARGE HAWAIIAN PIZZA", Description = "thin crust, tomato sauce, vegan cheese, pineapple, green pepper, onions", Price = 13.90M, NumMenu = 3},
-        new Pizza() { PizzaId = 4, Name = "SMALL EXQUISITE PIZZA", Description = "flatbread, tomato sauce, vegan cheese, tomatos, avocado, tofu, onions", Price = 6.00M, NumMenu = 4},
-        new Pizza() { PizzaId = 5, Name = "MEDIUM EXQUISITE PIZZA", Description = "flatbread, tomato sauce, vegan cheese, tomatos, avocado, tofu, onions", Price = 11.00M, NumMenu = 5},
-        new Pizza() { PizzaId = 6, Name = "LARGE EXQUISITE PIZZA", Description = "flatbread, tomato sauce, vegan cheese, tomatos, avocado, tofu, onions", Price = 15.50M, NumMenu = 6},
-        new Pizza() { PizzaId = 7, Name = "SMALL DELICIOUS PIZZA", Description = "thick crust, pesto sauce, vegan cheese, onions, red pepper, mushrooms", Price = 5.50M, NumMenu = 7},
-        new Pizza() { PizzaId = 8, Name = "MEDIUM DELICIOUS PIZZA", Description = "thick crust, pesto sauce, vegan cheese, onions, red pepper, mushrooms", Price = 10.50M, NumMenu = 8},
-        new Pizza() { PizzaId = 9, Name = "LARGE DELICIOUS PIZZA", Description = "thick crust, pesto sauce, vegan cheese, onions, red pepper, mushrooms", Price = 16.50M, NumMenu = 9},
-        new Pizza() { PizzaId = 10, Name = "GIANT SUPER PIZZA", Description = "thick crust, tomato sauce, tomate, pineapple, avocado", Price = 59.90M, NumMenu = 10}
+        new Pizza() { PizzaId = 1, Name = "SMALL HAWAIIAN PIZZA", Description = "thin crust, tomato sauce, vegan cheese, pineapple, green pepper, onions", Price = 5.00M},
+        new Pizza() { PizzaId = 2, Name = "MEDIUM HAWAIIAN PIZZA", Description = "thin crust, tomato sauce, vegan cheese, pineapple, green pepper, onions", Price = 9.50M},
+        new Pizza() { PizzaId = 3, Name = "LARGE HAWAIIAN PIZZA", Description = "thin crust, tomato sauce, vegan cheese, pineapple, green pepper, onions", Price = 13.90M},
+        new Pizza() { PizzaId = 4, Name = "SMALL EXQUISITE PIZZA", Description = "flatbread, tomato sauce, vegan cheese, tomatos, avocado, tofu, onions", Price = 6.00M},
+        new Pizza() { PizzaId = 5, Name = "MEDIUM EXQUISITE PIZZA", Description = "flatbread, tomato sauce, vegan cheese, tomatos, avocado, tofu, onions", Price = 11.00M},
+        new Pizza() { PizzaId = 6, Name = "LARGE EXQUISITE PIZZA", Description = "flatbread, tomato sauce, vegan cheese, tomatos, avocado, tofu, onions", Price = 15.50M},
+        new Pizza() { PizzaId = 7, Name = "SMALL DELICIOUS PIZZA", Description = "thick crust, pesto sauce, vegan cheese, onions, red pepper, mushrooms", Price = 5.50M},
+        new Pizza() { PizzaId = 8, Name = "MEDIUM DELICIOUS PIZZA", Description = "thick crust, pesto sauce, vegan cheese, onions, red pepper, mushrooms", Price = 10.50M},
+        new Pizza() { PizzaId = 9, Name = "LARGE DELICIOUS PIZZA", Description = "thick crust, pesto sauce, vegan cheese, onions, red pepper, mushrooms", Price = 16.50M},
+        new Pizza() { PizzaId = 10, Name = "GIANT SUPER PIZZA", Description = "thick crust, tomato sauce, tomate, pineapple, avocado", Price = 59.90M}
       });
 
 

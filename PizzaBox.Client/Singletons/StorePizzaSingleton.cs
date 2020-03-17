@@ -32,6 +32,16 @@ namespace PizzaBox.Client.Singletons
       sp.Inventory = new_inventory;
       return _spr.Update(sp);
     }
+
+    public bool Post(Store store, Pizza pizza)
+    {
+      var sp = new StorePizza();
+      sp.StorePizzaId = _spr.Get().Count() + 1;
+      sp.StoreId = store.StoreId;
+      sp.PizzaId = pizza.PizzaId;
+      sp.Inventory = 0;
+      return _spr.Post(sp);
+    }
     
   }
 }

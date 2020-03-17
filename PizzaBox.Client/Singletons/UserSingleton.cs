@@ -28,6 +28,7 @@ namespace PizzaBox.Client.Singletons
     public bool Post(string name, string password, string address)
     {
       var u = new User();
+      u.UserId = _ur.Get().Count() + 1;
       u.Name = name;
       u.Password = password;
       u.Address = address;

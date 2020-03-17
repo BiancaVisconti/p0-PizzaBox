@@ -28,6 +28,7 @@ namespace PizzaBox.Client.Singletons
     public bool Post(Store store, User user)
     {
       var o = new Order();
+      o.OrderId = _or.Get().Count() + 1;
       o.StoreId = store.StoreId;
       o.UserId = user.UserId;
     

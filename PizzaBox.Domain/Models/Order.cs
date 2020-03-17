@@ -28,8 +28,6 @@ namespace PizzaBox.Domain.Models
 
     public Order()
     {
-      OrderId = DateTime.Now.Ticks;
-
       Date = DateTime.Now;
     }
 

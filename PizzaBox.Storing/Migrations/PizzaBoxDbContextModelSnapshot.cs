@@ -241,9 +241,6 @@ namespace PizzaBox.Storing.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NumMenu")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
@@ -257,7 +254,6 @@ namespace PizzaBox.Storing.Migrations
                             PizzaId = 1L,
                             Description = "thin crust, tomato sauce, vegan cheese, pineapple, green pepper, onions",
                             Name = "SMALL HAWAIIAN PIZZA",
-                            NumMenu = 1,
                             Price = 5.00m
                         },
                         new
@@ -265,7 +261,6 @@ namespace PizzaBox.Storing.Migrations
                             PizzaId = 2L,
                             Description = "thin crust, tomato sauce, vegan cheese, pineapple, green pepper, onions",
                             Name = "MEDIUM HAWAIIAN PIZZA",
-                            NumMenu = 2,
                             Price = 9.50m
                         },
                         new
@@ -273,7 +268,6 @@ namespace PizzaBox.Storing.Migrations
                             PizzaId = 3L,
                             Description = "thin crust, tomato sauce, vegan cheese, pineapple, green pepper, onions",
                             Name = "LARGE HAWAIIAN PIZZA",
-                            NumMenu = 3,
                             Price = 13.90m
                         },
                         new
@@ -281,7 +275,6 @@ namespace PizzaBox.Storing.Migrations
                             PizzaId = 4L,
                             Description = "flatbread, tomato sauce, vegan cheese, tomatos, avocado, tofu, onions",
                             Name = "SMALL EXQUISITE PIZZA",
-                            NumMenu = 4,
                             Price = 6.00m
                         },
                         new
@@ -289,7 +282,6 @@ namespace PizzaBox.Storing.Migrations
                             PizzaId = 5L,
                             Description = "flatbread, tomato sauce, vegan cheese, tomatos, avocado, tofu, onions",
                             Name = "MEDIUM EXQUISITE PIZZA",
-                            NumMenu = 5,
                             Price = 11.00m
                         },
                         new
@@ -297,7 +289,6 @@ namespace PizzaBox.Storing.Migrations
                             PizzaId = 6L,
                             Description = "flatbread, tomato sauce, vegan cheese, tomatos, avocado, tofu, onions",
                             Name = "LARGE EXQUISITE PIZZA",
-                            NumMenu = 6,
                             Price = 15.50m
                         },
                         new
@@ -305,7 +296,6 @@ namespace PizzaBox.Storing.Migrations
                             PizzaId = 7L,
                             Description = "thick crust, pesto sauce, vegan cheese, onions, red pepper, mushrooms",
                             Name = "SMALL DELICIOUS PIZZA",
-                            NumMenu = 7,
                             Price = 5.50m
                         },
                         new
@@ -313,7 +303,6 @@ namespace PizzaBox.Storing.Migrations
                             PizzaId = 8L,
                             Description = "thick crust, pesto sauce, vegan cheese, onions, red pepper, mushrooms",
                             Name = "MEDIUM DELICIOUS PIZZA",
-                            NumMenu = 8,
                             Price = 10.50m
                         },
                         new
@@ -321,7 +310,6 @@ namespace PizzaBox.Storing.Migrations
                             PizzaId = 9L,
                             Description = "thick crust, pesto sauce, vegan cheese, onions, red pepper, mushrooms",
                             Name = "LARGE DELICIOUS PIZZA",
-                            NumMenu = 9,
                             Price = 16.50m
                         },
                         new
@@ -329,7 +317,6 @@ namespace PizzaBox.Storing.Migrations
                             PizzaId = 10L,
                             Description = "thick crust, tomato sauce, tomate, pineapple, avocado",
                             Name = "GIANT SUPER PIZZA",
-                            NumMenu = 10,
                             Price = 59.90m
                         });
                 });
@@ -345,9 +332,6 @@ namespace PizzaBox.Storing.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NumMenu")
-                        .HasColumnType("int");
-
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
@@ -361,7 +345,6 @@ namespace PizzaBox.Storing.Migrations
                             StoreId = 1L,
                             Address = "Cooper 786",
                             Name = "PizzaEater",
-                            NumMenu = 1,
                             Password = "eater"
                         },
                         new
@@ -369,7 +352,6 @@ namespace PizzaBox.Storing.Migrations
                             StoreId = 2L,
                             Address = "Mitchel 83",
                             Name = "DiegoPizza",
-                            NumMenu = 2,
                             Password = "diego"
                         },
                         new
@@ -377,7 +359,6 @@ namespace PizzaBox.Storing.Migrations
                             StoreId = 3L,
                             Address = "Mesquite 476",
                             Name = "MiPizza",
-                            NumMenu = 3,
                             Password = "pizza"
                         },
                         new
@@ -385,7 +366,6 @@ namespace PizzaBox.Storing.Migrations
                             StoreId = 4L,
                             Address = "Abram 34",
                             Name = "TuPizza",
-                            NumMenu = 4,
                             Password = "pizza"
                         },
                         new
@@ -393,7 +373,6 @@ namespace PizzaBox.Storing.Migrations
                             StoreId = 5L,
                             Address = "Cooper 132",
                             Name = "Mangiata",
-                            NumMenu = 5,
                             Password = "comer"
                         },
                         new
@@ -401,7 +380,6 @@ namespace PizzaBox.Storing.Migrations
                             StoreId = 6L,
                             Address = "Mesquite 87",
                             Name = "PizzaLover",
-                            NumMenu = 6,
                             Password = "pizza"
                         });
                 });

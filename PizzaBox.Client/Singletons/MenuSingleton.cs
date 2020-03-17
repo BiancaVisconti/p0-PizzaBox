@@ -177,6 +177,10 @@ namespace PizzaBox.Client.Singletons
               }
               else if (optionStore == "4")
               {
+                AddPizzaInventory(store);
+              }
+              else if (optionStore == "5")
+              {
                 Console.WriteLine($"Bye {store.Name}, hope to see you soon!");
                 Console.WriteLine("");
                 finishMenu = true;
@@ -346,8 +350,16 @@ namespace PizzaBox.Client.Singletons
           Console.WriteLine("----------------------------------");
           Console.WriteLine("");
           PostStore(username, password, address);
+          Store store = _sr.GetStore(username, password);
+          foreach (var p in _pr.Get())
+          {
+            PostStorePizza(store, p);
+          }
           Console.WriteLine($"{username}, your account is all set up!");
           Console.WriteLine("");
+          Console.WriteLine("Now please update the inventory!");
+          Console.WriteLine("");
+          AddPizzaInventory(store);
           Console.WriteLine("========================================================================");
           Console.WriteLine("");
         }
@@ -360,20 +372,21 @@ namespace PizzaBox.Client.Singletons
           Console.WriteLine("");
           Console.WriteLine("1) PAST ORDERS");
           Console.WriteLine("2) SALES AND REVENUE");
-          Console.WriteLine("3) INVENTORY");
-          Console.WriteLine("4) LOG OUT");
+          Console.WriteLine("3) VIEW INVENTORY");
+          Console.WriteLine("4) ADD PIZZAS TO INVENTORY");
+          Console.WriteLine("5) LOG OUT");
           Console.WriteLine("");
           Console.Write("Enter your option's number: ");
           string selection = Console.ReadLine();
           Console.WriteLine("");
-          bool check = selection == "1" || selection == "2" || selection == "3" || selection == "4";
+          bool check = selection == "1" || selection == "2" || selection == "3" || selection == "4" || selection == "5";
               
           while (!check)
           {
             Console.Write("The option you selected is not valid, please try again: ");
             selection = Console.ReadLine();
             Console.WriteLine("");
-            check = selection == "1" || selection == "2" || selection == "3" || selection == "4";
+            check = selection == "1" || selection == "2" || selection == "3" || selection == "4" || selection == "5";
           }
 
           return selection;
@@ -567,6 +580,44 @@ namespace PizzaBox.Client.Singletons
           }
         }
 
+        public static void AddPizzaInventory(Store store)
+        {
+          Console.WriteLine("================================");
+          Console.WriteLine("");
+          Console.WriteLine("Current Inventory");
+          Console.WriteLine("-----------------");
+          Console.WriteLine($"Stock | Pizza");
+          Console.WriteLine("-------------------------------");
+          foreach (var sp in _spr.GetPerStore(store))
+          {
+            Pizza pizza = _pr.GetPizza(sp.PizzaId);
+            Console.WriteLine($"  {sp.Inventory}   | {pizza.Name}");
+          }
+          Console.WriteLine("");
+          Console.WriteLine("Enter the number of pizzas to add per type, if none put 0");
+          foreach (var p in _spr.GetPerStore(store))
+          {
+            Pizza pizza = _pr.GetPizza(p.PizzaId);
+            Console.Write($"{pizza.Name}: ");
+            string add = Console.ReadLine();
+            int result;
+            bool check = int.TryParse(add, out result);
+            while (!check)
+            {              
+              Console.WriteLine("");
+              Console.Write("The option you selected is not valid, please try again: ");
+              add = Console.ReadLine();
+              Console.WriteLine("");
+              check = int.TryParse(add, out result);
+            }
+            int new_inventory = p.Inventory + Int32.Parse(add);
+            UpdateInventory(store, pizza, new_inventory);              
+          }
+          Console.WriteLine("");
+          Console.WriteLine($"{store.Name}, the inventory is updated!");
+          Console.WriteLine("");
+        }
+        
         public static void StoreViewInventory(Store store)
         {
           Console.WriteLine("================================");
@@ -574,13 +625,12 @@ namespace PizzaBox.Client.Singletons
           Console.WriteLine($"INVENTORY");
           Console.WriteLine("---------");
           Console.WriteLine("");
-          List<StorePizza> list = _spr.GetPerStore(store);
-          Console.WriteLine($"Stock | N° - Price - Name - Description");
-          Console.WriteLine("------------------------------------------------------------------------------------------------------");
-          foreach (var sp in list)
+          Console.WriteLine($"Stock | Pizza");
+          Console.WriteLine("-------------------------------");
+          foreach (var sp in _spr.GetPerStore(store))
           {
             Pizza pizza = _pr.GetPizza(sp.PizzaId);
-            Console.WriteLine($"{sp.Inventory}     | {pizza}");
+            Console.WriteLine($"  {sp.Inventory}   | {pizza.Name}");
           }
           Console.WriteLine("");
         }
@@ -1070,6 +1120,11 @@ namespace PizzaBox.Client.Singletons
         public static void PostOrderPizza(Order order, Pizza pizza, int amount)
         {
           _ops.Post(order, pizza, amount);
+        }
+
+        public static void PostStorePizza(Store store, Pizza pizza)
+        {
+          _sps.Post(store, pizza);
         }
 
         public static void PostUser(string name, string password, string address)

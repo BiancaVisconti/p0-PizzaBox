@@ -24,17 +24,6 @@ namespace PizzaBox.Client.Singletons
     {
       return _pr.Get();
     }
-
-    /*public bool Post()
-    {
-      var p = new Pizza();
-      p.Name = name;
-      p.Description = description;
-
-    
-      return _pr.Post(p);
-    }
-    */
     
   }
 }
