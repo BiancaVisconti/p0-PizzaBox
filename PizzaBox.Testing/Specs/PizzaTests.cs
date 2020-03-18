@@ -20,7 +20,7 @@ namespace PizzaBox.Testing.Specs
     [Theory]
     [InlineData(1)]
     [InlineData(2)]
-    public void Test_RepositoryGetName(long l)
+    public void Test_RepositoryGetName(int l)
     {
       var actual = sut.GetName(l);
 
@@ -30,7 +30,7 @@ namespace PizzaBox.Testing.Specs
     [Theory]
     [InlineData(1)]
     [InlineData(2)]
-    public void Test_RepositoryGetPrice(long l)
+    public void Test_RepositoryGetPrice(int l)
     {
       var actual = sut.GetPrice(l);
 

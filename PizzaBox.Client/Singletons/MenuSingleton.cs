@@ -373,7 +373,7 @@ namespace PizzaBox.Client.Singletons
           Console.WriteLine("1) PAST ORDERS");
           Console.WriteLine("2) SALES AND REVENUE");
           Console.WriteLine("3) VIEW INVENTORY");
-          Console.WriteLine("4) ADD PIZZAS TO INVENTORY");
+          Console.WriteLine("4) ADD OR REMOVE PIZZAS FROM INVENTORY");
           Console.WriteLine("5) LOG OUT");
           Console.WriteLine("");
           Console.Write("Enter your option's number: ");
@@ -422,7 +422,7 @@ namespace PizzaBox.Client.Singletons
           List<Order> listOrders = _or.Get(store);
           if (listOrders.Count == 0)
           {
-            Console.WriteLine("YOU DON'T HAVE ANY SALES SO FAR");
+            Console.WriteLine("You don't have any sales so far");
             Console.WriteLine("");
           }
           else
@@ -459,7 +459,7 @@ namespace PizzaBox.Client.Singletons
           List<Order> listOrders = _or.GetPeriod(store, days);
           if (listOrders.Count == 0)
           {
-            Console.WriteLine($"YOU DON'T HAVE ANY SALES IN THE LAST {days} DAYS");
+            Console.WriteLine($"You don't have any sales in the last {days} days");
             Console.WriteLine("");
           }
           else
@@ -594,7 +594,7 @@ namespace PizzaBox.Client.Singletons
             Console.WriteLine($"  {sp.Inventory}   | {pizza.Name}");
           }
           Console.WriteLine("");
-          Console.WriteLine("Enter the number of pizzas to add per type, if none put 0");
+          Console.WriteLine("Enter the number of pizzas to add(+) or subtract(-) per type, if none put 0");
           foreach (var p in _spr.GetPerStore(store))
           {
             Pizza pizza = _pr.GetPizza(p.PizzaId);
@@ -605,13 +605,24 @@ namespace PizzaBox.Client.Singletons
             while (!check)
             {              
               Console.WriteLine("");
-              Console.Write("The option you selected is not valid, please try again: ");
+              Console.Write("Not valid, must be a number, please try again: ");
               add = Console.ReadLine();
               Console.WriteLine("");
               check = int.TryParse(add, out result);
             }
             int new_inventory = p.Inventory + Int32.Parse(add);
-            UpdateInventory(store, pizza, new_inventory);              
+            bool check2 = new_inventory >= 0;
+            while (!check2)
+            {
+              Console.WriteLine("");
+              Console.Write("Not valid, the total inventory can't be negative, please try again: ");
+              add = Console.ReadLine();
+              new_inventory = p.Inventory + Int32.Parse(add);
+              check2 = new_inventory >= 0;
+              Console.WriteLine("");
+            }
+            UpdateInventory(store, pizza, new_inventory);
+                          
           }
           Console.WriteLine("");
           Console.WriteLine($"{store.Name}, the inventory is updated!");

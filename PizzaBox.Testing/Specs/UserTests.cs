@@ -32,7 +32,7 @@ namespace PizzaBox.Testing.Specs
     {
       var actual = sut.GetId(n, p);
 
-      Assert.IsType<long>(actual);
+      Assert.IsType<int>(actual);
     }
 
     [Theory]
@@ -47,7 +47,7 @@ namespace PizzaBox.Testing.Specs
     [Theory]
     [InlineData(1)]
     [InlineData(2)]
-    public void Test_RepositoryGetName(long l)
+    public void Test_RepositoryGetName(int l)
     {
       var actual = sut.GetName(l);
 
