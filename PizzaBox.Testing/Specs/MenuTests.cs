@@ -28,21 +28,23 @@ namespace PizzaBox.Testing.Specs
       Assert.True(actual != null);
     }
 
-    [Fact]
+    /*[Fact]
     public void Test_MenuForStore()
     {
       var actual = MenuSingleton.MenuForStore();
 
       Assert.IsType<string>(actual);
     }
+    */
 
-    [Fact]
+    /*[Fact]
     public void Test_CalculateSalesAndRevenue()
     {
       var actual = MenuSingleton.CalculateSalesAndRevenue(lo);
 
       Assert.True(actual.Count >= 0);
     }
+    */
 
     /*[Fact]
     public void Test_PreOrder()
