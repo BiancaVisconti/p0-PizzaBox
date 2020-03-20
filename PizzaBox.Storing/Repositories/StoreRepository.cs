@@ -78,6 +78,35 @@ namespace PizzaBox.Storing.Repositories
       _db.Store.Add(store);
       return _db.SaveChanges() == 1;
     }
+
+    public bool CheckIfNumLocationIsValid(string nuMenu)
+    {
+      int result;
+      if (int.TryParse(nuMenu, out result))
+      {
+        Store store = _sr.GetStore(Int32.Parse(nuMenu)); ///*******CHANGE METHOD
+        if (store == null)
+        {
+          return false;
+        }
+        else
+        {
+          return true;
+        }
+      }
+      else
+      {
+        return false;
+      }
+    }
+
+    public void ShowStores()
+    {
+      foreach (var s in _sr.Get())
+      {
+        Console.WriteLine(s);
+      }
+    }
  
   }
 }

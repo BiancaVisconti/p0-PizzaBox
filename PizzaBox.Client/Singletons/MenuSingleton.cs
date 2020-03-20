@@ -77,11 +77,11 @@ namespace PizzaBox.Client.Singletons
               }
               else if (optionUser == "2")
               {
-                bool check1 = HasItBeenMoreThan2Hours(user);
+                bool check1 = _ur.HasItBeenMoreThan2Hours(user);
                 if (check1)
                 {
                   Store store = ChooseAStore();
-                  bool check2 = HasItBeenMoreThan24Hours(user, store);
+                  bool check2 = _ur.HasItBeenMoreThan24Hours(user, store);
                   if (check2)
                   {
                     List<Pizza> list = PreOrder(user, store);
@@ -90,7 +90,7 @@ namespace PizzaBox.Client.Singletons
                       PostOrder(store, user);
                       var order = _or.Get();
                       Order o = order[order.Count-1];
-                      var dict = PizzaAmount(list);
+                      var dict = _pr.PizzaAmount(list);
                       foreach (var p in dict)
                       {
                         PostOrderPizza(o, p.Key, p.Value);
@@ -392,29 +392,6 @@ namespace PizzaBox.Client.Singletons
           return selection;
         }
 
-        public static Dictionary<long, int> CalculateSalesAndRevenue(List<Order> listOrders)
-        {
-          Dictionary<long, int> RepeatedPizzaSales = new Dictionary<long, int>();
-
-          foreach (var o in listOrders)
-          {
-            List<OrderPizza> listOrderPizza = _opr.Get(o);
-            for (int i = 0; i < listOrderPizza.Count(); i++)
-            {
-              if (RepeatedPizzaSales.ContainsKey(listOrderPizza[i].PizzaId))
-              {
-                RepeatedPizzaSales[listOrderPizza[i].PizzaId] += listOrderPizza[i].Amount;
-              }
-              else
-              {
-                RepeatedPizzaSales.Add(listOrderPizza[i].PizzaId, listOrderPizza[i].Amount);
-              }
-            }  
-          }
-
-          return RepeatedPizzaSales;
-        }
-        
         public static void StoreViewSalesAndRevenue(Store store)
         {
           Console.WriteLine("================================");
@@ -432,7 +409,7 @@ namespace PizzaBox.Client.Singletons
             Console.WriteLine("");
             decimal totalRevenue = 0;
             int totalAmount = 0;
-            Dictionary<long, int> RepeatedPizzaSales = CalculateSalesAndRevenue(listOrders);
+            Dictionary<long, int> RepeatedPizzaSales = _opr.CalculateSalesAndRevenue(listOrders);
             foreach (var p in RepeatedPizzaSales)
             {
               totalAmount += p.Value;
@@ -469,7 +446,7 @@ namespace PizzaBox.Client.Singletons
             Console.WriteLine("");
             decimal totalRevenue = 0;
             int totalAmount = 0;
-            Dictionary<long, int> RepeatedPizzaSales = CalculateSalesAndRevenue(listOrders);
+            Dictionary<long, int> RepeatedPizzaSales = _opr.CalculateSalesAndRevenue(listOrders);
             foreach (var p in RepeatedPizzaSales)
             {
               totalAmount += p.Value;
@@ -781,20 +758,20 @@ namespace PizzaBox.Client.Singletons
           Console.WriteLine("");
           Console.WriteLine("Please choose a pizzeria from the following");
           Console.WriteLine("");
-          ShowStores();
+          _sr.ShowStores();
           Console.WriteLine("");
 
           Console.Write("Enter the pizzeria's number: ");
           string selection_store = Console.ReadLine();
           Console.WriteLine("");
-          bool check3 = CheckIfNumLocationIsValid(selection_store);
+          bool check3 = _sr.CheckIfNumLocationIsValid(selection_store);
               
           while (!check3)
           {              
             Console.Write("The option you selected is not valid, please try again: ");
             selection_store = Console.ReadLine();
             Console.WriteLine("");
-            check3 = CheckIfNumLocationIsValid(selection_store);
+            check3 = _sr.CheckIfNumLocationIsValid(selection_store);
           }
 
           Store store = _sr.GetStore(Int32.Parse(selection_store));
@@ -855,26 +832,6 @@ namespace PizzaBox.Client.Singletons
           return selection;
         }
 
-        public static void ShowMenu(Dictionary<long, int> dict)
-        { 
-          foreach (var p in dict)
-          {
-            if (p.Value > 0)
-            {
-              Pizza pizza = _pr.GetPizza(p.Key);
-              Console.WriteLine(pizza);
-            }
-          }
-        }
-        
-        public static void ShowStores()
-        {
-          foreach (var s in _sr.Get())
-          {
-            Console.WriteLine(s);
-          }
-        }
-
         public static List<Pizza> PreOrder(User user, Store store)
         {
           List<Pizza> list = new List<Pizza>();
@@ -900,7 +857,7 @@ namespace PizzaBox.Client.Singletons
             }
             else
             {
-              ShowMenu(dict);
+              _pr.ShowMenu(dict);
               Console.WriteLine("");
               int selection_pizza = SelectPizza(dict);
               
@@ -1000,39 +957,6 @@ namespace PizzaBox.Client.Singletons
           return list;
         }
         
-        public static bool HasItBeenMoreThan2Hours(User user)
-        {
-          bool check = true;
-          List<Order> list = _or.Get(user);
-          foreach (var o in list)
-          {
-            
-            DateTime date = DateTime.Now;
-            double minutes = date.Subtract(o.Date).TotalMinutes;
-
-            if (minutes < 2*60)
-            {
-              check = false;
-            }
-          }
-          return check;
-        } 
-
-        public static bool HasItBeenMoreThan24Hours(User user, Store store)
-        {
-          bool check = true;
-          List<Order> list = _or.Get(user);
-          if (list.Count() > 0)
-          {
-            int count = _or.Get24HoursAtStore(user, store);
-            if (count > 0)
-            {
-              check = false;
-            }
-          }
-          return check;
-        }
-        
         public static void CheckOut(List<Pizza> list, User user)
         {
           if (list.Count > 0)
@@ -1063,66 +987,17 @@ namespace PizzaBox.Client.Singletons
           Console.Write("Enter your pizza's number: ");
           string selection_pizza = Console.ReadLine();
           Console.WriteLine("");
-          bool check = CheckIfNumMenuPizzaIsValid(selection_pizza, dict);
+          bool check = _pr.CheckIfNumMenuPizzaIsValid(selection_pizza, dict);
           while (!check)
           {
             Console.Write("The option you selected is not valid, please try again: ");
             selection_pizza = Console.ReadLine();
             Console.WriteLine("");            
-            check = CheckIfNumMenuPizzaIsValid(selection_pizza, dict);
+            check = _pr.CheckIfNumMenuPizzaIsValid(selection_pizza, dict);
           }
           return Int32.Parse(selection_pizza);
         }
         
-        public static bool CheckIfNumMenuPizzaIsValid(string nuMenu, Dictionary<long, int> dict)
-        {
-          int result;
-          if (int.TryParse(nuMenu, out result))
-          {
-            Pizza pizza = _pr.GetPizzaByNumMenu(Int32.Parse(nuMenu));
-            if (pizza != null)
-            {
-              foreach (var d in dict)
-              {
-                if(d.Key == pizza.PizzaId && d.Value > 0)
-                {
-                  return true;
-                }   
-              }
-              return false;
-            }
-            else
-            {
-              return false;
-            }
-            
-          }
-          else
-          {
-            return false;
-          }          
-        }    
-
-        public static bool CheckIfNumLocationIsValid(string nuMenu)
-        {
-          int result;
-          if (int.TryParse(nuMenu, out result))
-          {
-            Store store = _sr.GetStore(Int32.Parse(nuMenu)); ///*******CHANGE METHOD
-            if (store == null)
-            {
-              return false;
-            }
-            else
-            {
-              return true;
-            }
-          }
-          else{
-            return false;
-          }
-        }
-       
         public static void PostOrder(Store store, User user)
         {
           _os.Post(store, user);
@@ -1153,22 +1028,5 @@ namespace PizzaBox.Client.Singletons
           _sps.Update(store, pizza, new_inventory);
         }
 
-        public static Dictionary<Pizza, int> PizzaAmount(List<Pizza> list)
-        {
-          Dictionary<Pizza, int> RepeatedPizzaOrder = new Dictionary<Pizza, int>();
-
-          for (int i = 0; i < list.Count(); i++)
-          {
-              if (RepeatedPizzaOrder.ContainsKey(list[i]))
-              {
-                RepeatedPizzaOrder[list[i]]++;
-              }
-              else
-              {
-                RepeatedPizzaOrder.Add(list[i], 1);
-              }
-          }
-          return RepeatedPizzaOrder;
-        }
   }
 }

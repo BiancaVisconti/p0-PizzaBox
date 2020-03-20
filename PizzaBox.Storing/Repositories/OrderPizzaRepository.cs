@@ -26,6 +26,28 @@ namespace PizzaBox.Storing.Repositories
       _db.OrderPizza.Add(orderPizza);
       return _db.SaveChanges() == 1;
     }
+
+    public Dictionary<long, int> CalculateSalesAndRevenue(List<Order> listOrders)
+    {
+      Dictionary<long, int> RepeatedPizzaSales = new Dictionary<long, int>();
+
+      foreach (var o in listOrders)
+      {
+        List<OrderPizza> listOrderPizza = _opr.Get(o);
+        for (int i = 0; i < listOrderPizza.Count(); i++)
+        {
+          if (RepeatedPizzaSales.ContainsKey(listOrderPizza[i].PizzaId))
+          {
+            RepeatedPizzaSales[listOrderPizza[i].PizzaId] += listOrderPizza[i].Amount;
+          }
+          else
+          {
+            RepeatedPizzaSales.Add(listOrderPizza[i].PizzaId, listOrderPizza[i].Amount);
+          }
+        }  
+      }
+      return RepeatedPizzaSales;
+    }
     
   }
 }

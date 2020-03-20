@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ namespace PizzaBox.Storing.Repositories
   public class UserRepository : ARepository<User>, IUser
   {
     private static readonly UserRepository _ur = new UserRepository();
+    private static readonly OrderRepository _or = new OrderRepository();
 
     public List<User> Get() 
     {
@@ -63,6 +65,39 @@ namespace PizzaBox.Storing.Repositories
     {
       _db.User.Add(user);
       return _db.SaveChanges() == 1;
+    }
+
+    public bool HasItBeenMoreThan2Hours(User user)
+    {
+      bool check = true;
+      List<Order> list = _or.Get(user);
+      foreach (var o in list)
+      {
+        
+        DateTime date = DateTime.Now;
+        double minutes = date.Subtract(o.Date).TotalMinutes;
+
+        if (minutes < 2*60)
+        {
+          check = false;
+        }
+      }
+      return check;
+    } 
+
+    public bool HasItBeenMoreThan24Hours(User user, Store store)
+    {
+      bool check = true;
+      List<Order> list = _or.Get(user);
+      if (list.Count() > 0)
+      {
+        int count = _or.Get24HoursAtStore(user, store);
+        if (count > 0)
+        {
+          check = false;
+        }
+      }
+      return check;
     }
 
 

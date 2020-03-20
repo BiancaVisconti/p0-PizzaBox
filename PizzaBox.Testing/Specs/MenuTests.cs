@@ -62,12 +62,13 @@ namespace PizzaBox.Testing.Specs
     }
     */
 
-    [Fact]
+    /*[Fact]
     public void Test_PizzaAmount()
     {
       var actual = MenuSingleton.PizzaAmount(lp);
 
       Assert.True(actual.Count >= 0);
     }
+    */
   }
 }
